@@ -1,0 +1,465 @@
+body{
+    font-family: filson-pro, sans-serif !important; 
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+/* ####################### Header ####################### */
+
+header{
+    width: 100%;
+    height: auto;
+    /* background-color: black; */
+    
+   
+    background-position-x: 50%;
+}
+
+.navbar_out{
+    background-color:  #2C3539;
+}
+
+.navbar{
+    background-color: transparent !important;
+    color: white;
+    /* margin-top: 40px !important; */
+    width:100%;
+    
+}
+
+.nav-link{
+    color:white;
+    font-weight: 900;
+    font-style: normal;
+    
+}
+
+.navbar .navbar-collapse button{
+    border-radius: 24px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.navbar .navbar-collapse button:hover{
+    color:white;
+    background-color: #2C3539;
+}
+
+
+.search_form {
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+   
+}
+
+.search_from_in_div {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+}
+
+.search_form input {
+    width: 500px !important;
+}
+
+.search_form button {
+    border-radius: 5px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.search_form button:hover {
+    color:white;
+    background-color: #2C3539;
+}
+
+.search_form_text{
+    font-size: 40px;
+    color: white;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+
+/* ####################### Main ####################### */
+
+main{
+    height: auto;
+}
+
+.main_resume_paper{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.colored_page{
+    background-color:#D4DFE8;
+}
+
+
+
+.resume_part{
+    border-radius: 5px;
+    /* border: 1px solid #2C3539; */
+}
+
+.resume{
+    margin-left: 10%;
+    margin-top: 50px;
+}
+
+
+.resume > form > div{
+    margin-top: 50px;
+}
+
+.resume > form > button{
+    margin-right: 30px;
+    border-radius: 6px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.resume > form > button:hover{
+    color: white;
+    background-color: #2C3539;
+}
+
+.resume .title{
+    color: #2C3539;
+    font-weight: 700;
+}
+
+.profile_form > div {
+    margin-top: 30px;
+}
+
+.profile_form > div > input {
+    width: 400px;
+    margin-right: 50px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #C7D1DA;
+
+
+}
+
+
+.profile_form > div > input::placeholder {
+    color:  #2C3539;
+}
+
+.profile_form > div > input:focus::placeholder {
+    text-align: right;
+    color:rgb(44, 53, 57, 0.5);
+    font-size: 10px;
+}
+
+.specialist_form > div{
+    margin-top: 30px;
+}
+
+.specialist_form > div > input{
+    width: 400px;
+    margin-right: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #C7D1DA;
+
+}
+
+.specialist_form > div > select{
+    width: 50px;
+    margin-right: 50px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #C7D1DA;
+
+}
+
+.specialist_form > div > input::placeholder {
+    color:  #2C3539;
+    
+}
+
+
+.specialist_form > div > input:focus::placeholder {
+    text-align: right;
+    color:rgb(44, 53, 57, 0.5);
+    font-size: 10px;
+}
+
+
+.main_skills_form > div {
+    width: 700px;
+}
+
+.main_skills_form > div > input{
+    width: 400px;
+    margin-right: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #C7D1DA;
+
+}
+
+.main_skills_form > div > button{
+   background-color: #2C3539;
+   color:white;
+}
+
+.main_skills_form > div > button:hover{
+    font-size: 18px;
+}
+
+.main_skills_form > div > input::placeholder {
+    color:  #2C3539;
+    
+}
+
+.main_skills_form > div > input:focus::placeholder {
+    text-align: right;
+    color:rgb(44, 53, 57, 0.5);
+    font-size: 10px;
+}
+
+ 
+
+.particular_skill{
+    display: inline-block;
+    background-color: rgb(96, 131, 155, 0.7);;
+    margin-right: 20px;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.particular_skill > span{
+    padding: 10px 10px 10px 10px;
+}
+
+.particular_skill_remove{
+    cursor:pointer;
+}
+
+
+
+.about_yourself_form > div {
+    width: 700px;
+
+}
+
+.about_yourself_form > div > textarea {
+    width: 400px;
+    height: 150px;
+    margin-right: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #C7D1DA;
+    min-width: 400px;
+    max-width: 600px;
+    min-height: 100px;
+    max-height: 200px;
+
+}
+
+.about_yourself_form > div > input::placeholder {
+    color:  #2C3539;
+}
+
+.about_yourself_form > div > input:focus::placeholder {
+    text-align: right;
+    color:rgb(44, 53, 57, 0.5);
+    font-size: 10px;
+}
+
+
+@media screen and (max-width: 800px){
+    .profile_form > div > input {
+        width: 300px;
+    }
+
+    .specialist_form > div > input{
+        width: 300px;
+    
+    }
+
+    .main_skills_form > div > input{
+        width: 300px;
+    }
+
+    .about_yourself_form > div > textarea {
+        width: 300px;
+        min-width: 300px;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    .profile_form > div > input {
+        width: 200px;
+    }
+
+    .specialist_form > div > input{
+        width: 200px;
+    
+    }
+
+    .main_skills_form > div > input{
+        width: 200px;
+    }
+
+    .about_yourself_form > div > textarea {
+        width: 200px;
+        min-width: 200px;
+    }
+}
+
+/* ####################### Footer ####################### */
+footer{
+    width: 100%;
+    height: 600px;
+    background-color: #2C3539;
+}
+
+
+footer section{
+    
+    width: 100%;
+    height: 80%;
+    padding-top: 80px;
+    background-color: #FFCC4F;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+
+.section_div_first{
+    width: 100%;
+    display: inline-flex;
+}
+
+
+.footer_gmail{
+    font-size: 25px;
+    font-weight: 1000;
+    margin-left: 100px;
+    margin-bottom: 30px;
+
+}
+
+.footer_list{
+    display: inline-flex;
+
+}
+
+.footer_list > div{
+    margin-left: 100px;
+}
+
+.footer_list > div > p {
+    font-size: 20px;
+    font-weight: 700;
+    color:rgb(44, 53, 57);
+}
+
+.footer_list > div > ul {
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    color:rgb(44, 53, 57, 0.6);
+}
+
+.footer_list > div > ul > li {
+    cursor: pointer;
+}
+
+.footer_list > div > ul > li:hover {
+    color:rgb(44, 53, 57, 0.9);
+}
+
+.get_in_touch{
+    background-color: transparent;
+    color:rgb(44, 53, 57);
+    border: 1px solid rgb(44, 53, 57) !important;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.get_in_touch:hover{
+    background-color:rgb(44, 53, 57);
+    color:white;
+}
+
+
+
+
+.social_line{
+   margin-top: 50px;
+   padding-left: 50px;
+   width: 100%;
+}
+
+.social_line > a{
+    font-size: 30px;
+    margin-left: 30px;
+    color: white;
+}
+
+
+.footer_about_us{
+    bottom: 0px;
+    width:700px;
+    margin-top: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 16px;
+
+}
+
+
+
+
+@media screen and (max-width: 800px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    
+    .footer_about_us{
+        font-size:12px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    .footer_about_us{
+        font-size:12px;
+    }
+}

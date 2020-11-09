@@ -1,0 +1,323 @@
+body{
+    font-family: filson-pro, sans-serif !important; 
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+/* ####################### Header ####################### */
+
+header{
+    width: 100%;
+    height: auto;
+    position: relative;
+    /* background-color: black; */
+    /* background-image: url("../images/bg-applicant-asia-1__min_.jpg");
+    background-size: cover;
+    background-position-x: 50%; */
+}
+
+
+.navbar_out{
+    background-color:  #2C3539;
+}
+
+.navbar{
+    background-color: transparent !important;
+    color: white;
+    /* margin-top: 40px !important; */
+    width:100%;
+}
+    
+
+.nav-link{
+    color:white;
+    font-weight: 900;
+    font-style: normal;
+    
+}
+
+.navbar .navbar-collapse button{
+    border-radius: 24px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+
+.search_form {
+    width: 100%;
+    position: relative;
+    /* -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+   
+}
+
+.search_from_in_div {
+    margin-top: 30px !important;
+   
+}
+
+.search_form input {
+    width: 500px !important;
+}
+
+.search_form button {
+    border-radius: 5px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.search_form_text{
+    font-size: 40px;
+    color: white;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@media screen and (max-width: 800px){
+    .search_form input {
+        width: 300px !important;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .search_form input {
+        width: 200px !important;
+    }
+}
+
+
+/* ####################### Main Talshyn ####################### */
+.list-group{
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+.card-subtitle{
+    font-size: 14px;
+}
+
+.main_right li {
+    list-style-type: none; /* Убираем маркеры */
+
+   }
+
+.main_right a{
+color: black;
+}
+
+.main_right p{
+  color: grey;
+  font-size: 12px;
+
+}
+
+/* .material-icons{
+
+
+} */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+
+.tile {
+  height:70px;
+  border-radius:4px;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+  margin-bottom: 70px;
+  float:left;
+}
+
+.tile.wide {
+  width: 100%;
+}
+
+.tile .header {
+  height:60px;
+  border-radius: 4px 4px 0 0;
+  color:white;
+ 
+}
+
+.tile.wide .header .left, .tile.wide .header .right {
+  width:100%;
+  float:left;
+}
+
+.tile .header .count {
+  font-size: 15px;
+  text-align:center;
+  padding:10px 0 0;
+}
+
+.tile .header .title {
+  font-size: 12px;
+  text-align:center;
+ 
+}
+
+.tile .body {
+  height:30px;
+  border-radius: 0 0 4px 4px;
+  color:#333333;
+  background-color:white;
+}
+
+.tile .body .title {
+    text-align:center;
+    font-size:12px;
+    font-weight: bold;
+    padding-top:2%;
+}
+
+.tile.quote .header {
+  background: linear-gradient(to bottom right, #1f6abb, #4f9cf2);
+}
+
+.tile.quote  .body {
+  color: #1f6abb;
+}
+
+.title a{
+    color: white;
+}
+
+
+
+/* ####################### Footer ####################### */
+footer{
+    width: 100%;
+    height: 600px;
+    background-color: #2C3539;
+}
+
+
+footer section{
+    
+    width: 100%;
+    height: 80%;
+    padding-top: 80px;
+    background-color: #FFCC4F;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+
+.section_div_first{
+    width: 100%;
+    display: inline-flex;
+}
+
+
+.footer_gmail{
+    font-size: 25px;
+    font-weight: 1000;
+    margin-left: 100px;
+    margin-bottom: 30px;
+
+}
+
+.footer_list{
+    display: inline-flex;
+
+}
+
+.footer_list > div{
+    margin-left: 100px;
+}
+
+.footer_list > div > p {
+    font-size: 20px;
+    font-weight: 700;
+    color:rgb(44, 53, 57);
+}
+
+.footer_list > div > ul {
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    color:rgb(44, 53, 57, 0.6);
+}
+
+.footer_list > div > ul > li {
+    cursor: pointer;
+}
+
+.footer_list > div > ul > li:hover {
+    color:rgb(44, 53, 57, 0.9);
+}
+
+.get_in_touch{
+    background-color: transparent;
+    color:rgb(44, 53, 57);
+    border: 1px solid rgb(44, 53, 57) !important;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.get_in_touch:hover{
+    background-color:rgb(44, 53, 57);
+    color:white;
+}
+
+
+
+
+.social_line{
+   margin-top: 50px;
+   padding-left: 50px;
+   width: 100%;
+}
+
+.social_line > a{
+    font-size: 30px;
+    margin-left: 30px;
+    color: white;
+}
+
+
+.footer_about_us{
+    bottom: 0px;
+    width:700px;
+    margin-top: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 16px;
+
+}
+
+
+@media screen and (max-width: 800px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    
+    .footer_about_us{
+        font-size:12px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    .footer_about_us{
+        font-size:12px;
+    }
+}
+
+

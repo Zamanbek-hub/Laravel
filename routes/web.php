@@ -13,6 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home_without_reg');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/home_emp', function () {
+    return view('home_employers');
+});
+
+Route::get('/auth', function () {
+    return view('auth');
+});
+
+
+Route::get('/contact_us', function () {
+    return view('contact_us');
+});
+
+Route::get('/reg', function () {
+    return view('reg');
+});
+
+Route::get('/resume', function () {
+    return view('resume');
+});
+
+Route::get('/resume_hire', function () {
+    return view('resume_hire');
+});
+

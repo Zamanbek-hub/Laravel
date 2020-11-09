@@ -1,0 +1,276 @@
+body{
+    font-family: filson-pro, sans-serif !important; 
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+/* ####################### Header ####################### */
+
+header{
+    width: 100%;
+    height: 750px;
+    /* background-color: black; */
+    background-image: url("/img/bg-applicant-asia-1__min_.jpg");
+    background-size: cover;
+    background-position-x: 50%;
+}
+
+
+.navbar{
+    background-color: transparent !important;
+    color: white;
+    padding-top: 40px !important;
+    
+}
+
+.nav-link{
+    color:white;
+    font-weight: 900;
+    font-style: normal;
+    
+}
+
+.navbar .navbar-collapse button{
+    border-radius: 24px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+
+.search_form {
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+   
+}
+
+.search_from_in_div {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+}
+
+.search_form input {
+    width: 500px !important;
+}
+
+.search_form button {
+    border-radius: 5px;
+    background-color: #FFCC4F;
+    color:#2C3539;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.search_form_text{
+    font-size: 40px;
+    color: white;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* ####################### Main Talshyn ####################### */
+.body_main_p1{
+
+	background-color: #60839b;
+	font-family: "filson-pro", sans-serif;
+	color: #fff;
+	padding-top:100px;
+	padding-bottom:100px;
+	
+}
+
+.title{
+	text-transform: uppercase;
+	font-weight: bolder;
+	font-size: 20px;
+
+}
+
+.content{
+	font-size: 34px;
+
+}
+
+.body_main_p2{
+
+	background-color: whitesmoke;
+	font-family: "filson-pro", sans-serif;
+	padding-top:100px;
+	padding-bottom:100px;
+	
+}
+
+.p2_title {
+	text-transform: uppercase;
+	font-weight: bolder;
+	font-size: 40px;
+
+}
+
+.p2_content img{
+	width: 200px;  
+	max-height: 100px; 
+	margin: 40px;
+}
+
+.p2_end a{
+	color: #FFCC4F;
+	font-weight: bold;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+    border: none;
+}
+
+.body_main_p3 img{
+	max-width: 500px;
+	max-height: 320px;
+}
+
+.body_main_p3 h4{
+	text-transform: uppercase;
+	font-size: 40px;
+	font-weight: normal;
+
+}
+
+/* ####################### Footer ####################### */
+footer{
+    width: 100%;
+    height: 600px;
+    background-color: #2C3539;
+}
+
+
+footer section{
+    
+    width: 100%;
+    height: 80%;
+    padding-top: 80px;
+    background-color: #FFCC4F;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+
+.section_div_first{
+    width: 100%;
+    display: inline-flex;
+}
+
+
+.footer_gmail{
+    font-size: 25px;
+    font-weight: 1000;
+    margin-left: 100px;
+    margin-bottom: 30px;
+
+}
+
+.footer_list{
+    display: inline-flex;
+
+}
+
+.footer_list > div{
+    margin-left: 100px;
+}
+
+.footer_list > div > p {
+    font-size: 20px;
+    font-weight: 700;
+    color:rgb(44, 53, 57);
+}
+
+.footer_list > div > ul {
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    color:rgb(44, 53, 57, 0.6);
+}
+
+.footer_list > div > ul > li {
+    cursor: pointer;
+}
+
+.footer_list > div > ul > li:hover {
+    color:rgb(44, 53, 57, 0.9);
+}
+
+.get_in_touch{
+    background-color: transparent;
+    color:rgb(44, 53, 57);
+    border: 1px solid rgb(44, 53, 57) !important;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.get_in_touch:hover{
+    background-color:rgb(44, 53, 57);
+    color:white;
+}
+
+
+
+
+.social_line{
+   margin-top: 50px;
+   padding-left: 50px;
+   width: 100%;
+}
+
+.social_line > a{
+    font-size: 30px;
+    margin-left: 30px;
+    color: white;
+}
+
+
+.footer_about_us{
+    bottom: 0px;
+    width:700px;
+    margin-top: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 16px;
+
+}
+
+
+
+@media screen and (max-width: 800px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    
+    .footer_about_us{
+        font-size:12px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .footer_list > div > ul {
+        font-size: 10px;
+        font-weight: 300;
+    }
+
+    .footer_about_us{
+        font-size:12px;
+    }
+}
