@@ -15,18 +15,18 @@ class CreateResumesTable extends Migration
     {
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('resume_text');
-            $table->integer('view_count');
-            $table->integer('salary');
             $table->string('description');  
             $table->string('url_portfolio');  
+            $table->integer('view_count');
+            $table->integer('salary');
             $table->bigInteger('student_id')->unsigned();
-            $table->timestamps();
+
             $table->foreign('student_id')
             ->references('id')
             ->on('students')
             ->onCascade('delete');
-            // $table->timestamps('last_updated_date');
         });
     }
 

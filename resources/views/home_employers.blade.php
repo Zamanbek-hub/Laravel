@@ -18,9 +18,9 @@
 @section('content')
 
 <body>
-    @include('layouts.header') 
+@include('layouts.header_without_reg')
 
-    <form class="form-inline my-2 my-lg-0 search_form container">
+<form class="form-inline my-2 my-lg-0 search_form container">
 
     <div class="search_from_in_div">
         <input class="form-control mr-sm-2" type="search" placeholder="Search Job" aria-label="Search">
@@ -32,20 +32,20 @@
         <div class="container mt-5">
             <div class="row " >
                     <div class="col-md-3">
-                        <div class="list-group mb-5">  
+                        <div class="list-group mb-5">
                             <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
                                     <span class="material-icons" style="margin-right:5px; ">face</span> Nazym Isbassarova
                             </a>
                             <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
                                     <span class="material-icons" style="margin-right:5px; ">apartment</span> BI group company
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action d-flex"> 
+                            <a href="#" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">star_outline</span>Selected resume
                             </a>
                             <a href="#" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">contact_mail</span>My responses
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action d-flex">  
+                            <a href="#" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">remove_red_eye</span>Vacancy views
                             </a>
                             <a href="#" class="list-group-item list-group-item-action d-flex">
@@ -89,7 +89,7 @@
                             <div class="count">Alibi Toktassyn</div>
                             <div class="title"><a href="#" >Open resume</a></div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
                             <div class="title">Python Developer</div>
@@ -102,7 +102,7 @@
                             <div class="count">Aidana Assysbekova</div>
                             <div class="title"><a href="#" >Open resume</a></div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
                             <div class="title">Middle C# Developer</div>
@@ -115,7 +115,7 @@
                             <div class="count">Serik Sultanbek</div>
                             <div class="title"><a href="#" >Open resume</a></div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
                             <div class="title"> Junior System Analyst</div>
@@ -127,7 +127,7 @@
                             <div class="count">Aya Sapakova</div>
                             <div class="title"><a href="#" >Open resume</a></div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
                             <div class="title">Middle Java Developer</div>
@@ -140,7 +140,7 @@
                             <div class="count">Zamanbek Turukbaev</div>
                             <div class="title"><a href="#" >Open resume</a></div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
                             <div class="title"> Junior System Analyst</div>
@@ -149,13 +149,13 @@
 
 
                 </div>
-                    
+
         </div>
             <hr style="color: #343434;">
             <div class="d-flex justify-content-center">
             <a href="#" class="btn btn-outline-warning mb-5" type="button" style="color: black; border-color: grey; ">Recommendations</a>
         </div>
-        
+
         </div>
     </div>
 

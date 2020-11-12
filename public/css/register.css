@@ -19,7 +19,7 @@ select.form-control:focus {
 .container{
 	background-color: #60839b;
 	width: 400px;
-	/* height:; */
+	height:;
 	border-radius: 5px;
 	margin: auto;
 	position: absolute;
