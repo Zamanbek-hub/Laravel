@@ -65,7 +65,7 @@
                     </div>
                     <div class="card mb-4" >
                         <div class="card-body">
-                            <h5 class="card-title"  style="font-weight: bold;">Vacancy : Python Developer</h5>
+                            <h5 class="card-title"  style="font-weight: bold;">Vacancy : Python </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Last changes in 27.05.2020</h6>
                             <p class="card-text"  style="font-weight: bolder;"> Company: BI group</p>
                             <a href="#" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; ">More details</a>
