@@ -11,6 +11,7 @@ use App\Models\Students;
 use App\Models\Specialties;
 use App\Models\Resume_skills;
 use App\Models\User;
+use App\Models\Vacancies;
 
 
 class ResumeController extends Controller
@@ -22,9 +23,41 @@ class ResumeController extends Controller
         $student = Students::where('user_id',$user->id)->get();
 
         $resumes = Resumes::where('student_id',$student[0]->id)->get();
+
+        
+        $count=0;
+        $vacs=array();
+        $vacancies = Vacancies::get();
+        foreach($resumes as $res){
+          foreach($res->specialties as $sp){
+            for($i=0; $i<count($vacancies); $i++){
+              foreach($vacancies[$i]->specialties as $spec){
+                if($sp->id==$spec->id){
+                    $count++;
+                }
+              }
+              if($count>0){
+                $c=0;
+                for($j=0; $j<count($vacs); $j++){
+                  if($vacs[$j]->id==$vacancies[$i]->id){
+                    $c++;
+                  }
+                }
+                if($c==0){
+                  array_push($vacs, $vacancies[$i]);
+                }
+                $c=0;
+              }
+              $count=0;
+            }
+          }
+        }
+
+        
+
         
         $specialties = DB::table('specialties')->get();
-       return view('resumes.index',compact('resumes'),[ 'student'=>$student]);   
+       return view('resumes.index',['student'=>$student,'vacs'=>$vacs],compact('resumes'));   
    }
 
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Employers;
 use App\Models\User;
 use App\Models\Skills;
+use App\Models\Resumes;
 
 use App\Models\Specialties;
 use App\Models\Vacancies;
@@ -20,8 +21,37 @@ class VacancyController extends Controller{
         $employer = Employers::where('user_id',$user->id)->get();
         $vacancies = Vacancies::where('employer_id',$employer[0]->id)->get();
 
+        $count=0;
+        $ress=array();
+        $resumeS = Resumes::get();
+        foreach($vacancies as $vac){
+          foreach($vac->specialties as $sp){
+            for($i=0; $i<count($resumeS); $i++){
+              foreach($resumeS[$i]->specialties as $spec){
+                if($sp->id==$spec->id){
+                    $count++;
+                }
+              }
+              if($count>0){
+                $c=0;
+                for($j=0; $j<count($ress); $j++){
+                  if($ress[$j]->id==$resumeS[$i]->id){
+                    $c++;
+                  }
+                }
+                if($c==0){
+
+                  array_push($ress, $resumeS[$i]);
+                }
+                $c=0;
+              }
+              $count=0;
+            }
+          }
+        }
+
         $specialties = DB::table('specialties')->get();
-       return view('vacancies.index',compact('vacancies'),['employer'=>$employer]);   
+       return view('vacancies.index',compact('vacancies'),['employer'=>$employer,'resumes'=>$ress]);   
    }
 
    public function create(){
@@ -29,7 +59,6 @@ class VacancyController extends Controller{
         $employer = Employers::where('user_id',$user->id)->get();
         $specialties = DB::table('specialties')->orderBy('name','asc')->get();
         return view('vacancies.create',['emp'=>$employer,'specialties'=>$specialties,'user'=>$user]); 
-
    }
 
    public function store(){
@@ -65,8 +94,6 @@ class VacancyController extends Controller{
         $employer = Employers::findOrFail(1);
         $specialties = DB::table('specialties')->get();
 
-      
-      //  error_log($arr);
        return view('vacancies.show',compact('vacancy'),['specialties'=>$specialties,'emp'=>$employer]);   
     }
 
@@ -94,16 +121,14 @@ class VacancyController extends Controller{
         $vacancy->email=request('email');
         $vacancy->phone_number=request('phone_number');
         $vacancy->description=request('description');
-    //    $vacancy->spec_id=request('spec_id');
+
         $vacancy->salary=request('salary');
-        //$vacancy->view_count=0;
+
         $vacancy->employer_id=1;
         $ldate = date('Y-m-d H:i:s');
         $vacancy->updated_at=$ldate;
 
         
-
-
         $vacancy->save();
               
 

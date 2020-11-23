@@ -12,4 +12,8 @@ class Employers extends Model
     public function vacancies(){
         return $this->hasMany('App\Models\Vacancies');
     }
+
+    public function region(){
+        return $this->belongsTo('App\Models\Regions');
+    }
 }
