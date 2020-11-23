@@ -15,18 +15,22 @@ class CreateEmployersTable extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('pnumber');
-            $table->bigInteger('user_id')->unsigned();
+            $table->string('name');
+            $table->string('surname');
+            $table->string('phone_number');
+            $table->string('password');
+            $table->string('description');
+            $table->string('company_name');
             $table->bigInteger('region_id')->unsigned();
-
-            $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onCascade('delete');
+            $table->bigInteger('user_id')->unsigned();
+            $table->timestamps();
             $table->foreign('region_id')
             ->references('id')
             ->on('regions')
+            ->onCascade('delete');              
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
             ->onCascade('delete');
         });
     }

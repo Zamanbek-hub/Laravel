@@ -15,14 +15,16 @@ class CreateResumesTable extends Migration
     {
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('full_name');
+            $table->string('email');
+            $table->string('phone_number');
             $table->string('resume_text');
-            $table->string('description');  
-            $table->string('url_portfolio');  
             $table->integer('view_count');
             $table->integer('salary');
+            $table->string('description');  
+            $table->string('url_portfolio');  
             $table->bigInteger('student_id')->unsigned();
-
+            $table->timestamps();
             $table->foreign('student_id')
             ->references('id')
             ->on('students')

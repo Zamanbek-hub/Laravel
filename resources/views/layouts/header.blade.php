@@ -25,7 +25,6 @@
                     @if (Route::has('login'))
                         @else
                             <a href="./home_without_reg.html"><button class="btn my-2 my-sm-0" type="button">Log out</button></a>
-                        @endif
 
                     @endif
                 </div>
