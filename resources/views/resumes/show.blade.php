@@ -26,22 +26,34 @@
                     <div class="card-body"> 
                         <h5 class="card-title mt-3 mb-3" align="center" style="font-weight: bold; "> Resume </h5>
                         <p class="card-text" > Fullname:<span style="font-weight: bolder;"> {{$resume->full_name}}  </span></p>
-
-                        <p class="card-text" style="font-weight: bolder;">
-                            @foreach($specialties as $sp)
-                            @if($sp->id==$resume->spec_id)
-                                 Specialty: {{$sp->name}}
-                            @endif
-                            @endforeach
-                        </p>
+                            @if(count($resume->specialties)!=0)
+                            <p class="card-text pr-2" > Specialty :  
+                                  @foreach($resume->specialties as $sp)
+                                    <span style="font-weight: bolder;">  {{ $sp->name }} , </span> 
+                                  @endforeach
+                                  </p>
+                            @else
+                            <p class="card-text" > Specialty: <em>no specialty</em> </p>
+                          @endif
                         <p class="card-text" > Salary:<span style="font-weight: bolder;"> {{$resume->salary}} KZT  </span></p>
                         <p class="card-text" > Email:<span style="font-weight: bolder;"> {{$resume->email}}  </span></p>
 
                         <p class="card-text" > Telephone number:<span style="font-weight: bolder;"> <em>{{$resume->phone_number}} </em> </span></p>
                         <p class="card-text" > Portfolio URL:<span style="font-weight: bolder;"> {{$resume->url_portfolio}}  </span></p>
+                        <div>
+                              @if(count($resume->skills)!=0)
+                              <p class="card-text" > Skills: </p>
+                                  <ul class="d-flex">
+                                    @foreach($resume->skills as $skill)
+                                      <li class="d-flex" style="margin-left:30px; font-weight: bolder; border: 1px solid lightgrey; background-color: lightgrey;">{{ $skill->name }}</li>
+                                    @endforeach
+                                  </ul>
+                              @else
+                              <p class="card-text" > Skills: <em>no skills</em> </p>
+                            @endif
+                          </div>
                         <p class="card-text mb-4" > About myself:<span style="font-weight: bolder;"> {{$resume->description}}  </span></p>
 
-                        <!-- <a href="" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> Edit</a> -->
                         <form action="/resume/{{$resume->id}}" method="post">
                         @csrf
                         @method('DELETE')

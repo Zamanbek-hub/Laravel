@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- jQuery and JS bundle w/ Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
                       <div class="col-md-3">
                           <div class="list-group mb-5">  
                               <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
-                                 <span class="material-icons" style="margin-right:5px; ">face</span> {{$student->name}} {{$student->surname}}
+                                 <span class="material-icons" style="margin-right:5px; ">face</span> {{$student[0]->name}} {{$student[0]->surname}}
                               </a>
                               <a href="#" class="list-group-item list-group-item-action d-flex" >
                                       <span class="material-icons" style="margin-right:5px;">event_note</span> My events
@@ -62,12 +62,12 @@
                                 <div class="card-body">
                                       <h5 class="card-title" style="font-weight: bold;"> Resume № {{$i+1}} </h5>
                                       <p class="card-subtitle mb-2 text-muted" >Last changes in {{$resumes[$i]->updated_at}}</p>
-                                      <p class="card-text" style="font-weight: bolder;">
-                                        @foreach($specialties as $sp)
-                                          @if($sp->id==$resumes[$i]->spec_id)
-                                              {{$sp->name}}
-                                          @endif
+                                      <p class="card-text" style="font-weight: bolder;"> Specialty:
+                                      @if(count(($resumes[$i])->specialties)!=0)
+                                        @foreach($resumes[$i]->specialties as $spee)
+                                              {{$spee->name}} ,
                                         @endforeach
+                                        @endif
                                       </p>
                                       <a href="/resume/{{$resumes[$i]->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
                                 </div>

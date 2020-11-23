@@ -61,11 +61,11 @@
                         <div class="card mb-4" >
                             <div class="card-body">
                                 <h5 class="card-title" style="font-weight: bold;">Vacancy : 
-                                    @foreach($specialties as $spec)
-                                        @if($vacancies[$i]->spec_id==$spec->id)
-                                            {{ $spec->name}}
+                                @if(count(($vacancies[$i])->specialties)!=0)
+                                        @foreach($vacancies[$i]->specialties as $spee)
+                                              {{$spee->name}} ,
+                                        @endforeach
                                         @endif
-                                    @endforeach
                                 </h5>
                                 <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancies[$i]->updated_at}}</p>
                                 <p class="card-text" style="font-weight: bolder;"> Company: {{$employer[0]->company_name}}</p>

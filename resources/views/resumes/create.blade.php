@@ -26,7 +26,7 @@
                         <div class="profile_form">
                             <h3>1. Tell us who you are?</h3>
                             <div>
-                                <input type="text" value="{{$student->name}}  {{$student->surname}}" name="full_name" placeholder="Full name" required>
+                                <input type="text" value="{{$student[0]->name}}  {{$student[0]->surname}}" name="full_name" placeholder="Full name" required>
                             </div>
                             <br/>
                             <div>
@@ -45,15 +45,19 @@
 
                         <div class="specialist_form">
                             <h3>2.You're skilled as a...</h3>
+                            <div id="specialties">
+                           
+                            </div>
                             
                             <div>
-                                <select name="spec_id" style="width:400px;">
-                                @if(count($specs)!=0)
-                                    @foreach($specs as $sp)
-                                    <option value="{{$sp->id}}"> {{$sp->name}} </option>
-                                    @endforeach
-                                @endif
+                                <select name="spec_id"  id="add_spec" style="width:400px;">
+                                    @if(count($specs)!=0)
+                                        @foreach($specs as $sp)
+                                        <option value="{{$sp->name}}"> {{$sp->name}} </option>
+                                        @endforeach
+                                    @endif
                                 </select>
+                                <button class="btn my-2 my-sm-0" type="button" onclick="addSpec()">Keep</button>
                             </div>
                             <br/>
 
@@ -61,7 +65,6 @@
                                 <input type="number" value="" name="salary" placeholder="Salary" required>
                                 <select style="width:150px;">
                                     <option>KZT</option>
-                                  
                                 </select>
                             </div>
                             <br/>
@@ -77,7 +80,14 @@
                             
                             <br/>
                             <div>
-                                <input type="text" name="skill" id="add_skill" placeholder="skill">
+                                <!-- <input type="text" name="skill" id="add_skill" placeholder="skill"> -->
+                                <select name="skill" id="add_skill">
+                                    <option>c++ </option>
+                                    <option>c# </option>
+                                    <option>java </option>
+                                    <option> python </option>
+                                    <option>laravel </option>
+                                 </select>
                                 <button class="btn my-2 my-sm-0" type="button" onclick="addSkill()">Keep</button>
                             </div>
                             
@@ -127,6 +137,29 @@
         }
 
         const removeSkill = (id) => {
+            // alert(id);
+            document.getElementById(id).style.display = "none"; 
+        }
+    </script>
+      <script type="text/javascript">
+        const addSpecInput = document.getElementById("add_spec");
+        const addSpec = () => {
+
+            if(addSkillInput.value != ''){
+                document.getElementById("specialties").innerHTML += 
+                `<div class="particular_spec" id="particular_spec_${addSpecInput.value}">
+                    <input type="text" value="${addSpecInput.value}" name="ggg" disabled>
+                    <span class="particular_spec_remove" onclick="removeSpec('particular_spec_${addSpecInput.value}')">
+                        <i class="far fa-trash-alt"></i>
+                        </span>
+                </div>`
+                
+            }
+
+            addSpecInput.value = "";
+        }
+
+        const removeSpec = (id) => {
             // alert(id);
             document.getElementById(id).style.display = "none"; 
         }

@@ -9,7 +9,7 @@ class Employers extends Model
 {
     use HasFactory;
 
-    public function resumes(){
+    public function vacancies(){
         return $this->hasMany('App\Models\Vacancies');
     }
 }
