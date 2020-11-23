@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Resumes extends Model
+class Vacancies extends Model
 {
     use HasFactory;
 
-    public function student(){
-        return $this->belongsTo('App\Models\Students');
+    public function employer(){
+        return $this->belongsTo('App\Models\Employers');
     }
 
     public function specialties(){
