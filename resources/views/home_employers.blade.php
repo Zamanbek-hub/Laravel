@@ -39,7 +39,7 @@
                             <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
                                     <span class="material-icons" style="margin-right:5px; ">apartment</span> BI group company
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action d-flex">
+                            <a href="/selected_resumes" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">star_outline</span>Selected resume
                             </a>
                             <a href="#" class="list-group-item list-group-item-action d-flex">
@@ -54,100 +54,34 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card mb-4" >
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: bold;">Vacancy : Android Developer</h5>
-                            <p class="card-subtitle mb-2 text-muted" >Last changes in 20.10.2020</p>
-                            <p class="card-text" style="font-weight: bolder;"> Company: BI group</p>
-                            <a href="#" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
-                            <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
+                    @foreach($vacancies as $vacancy)
+                        <div class="card mb-4" >
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-weight: bold;">Vacancy :{{$vacancy->description}}</h5>
+                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancy->updated_at}}</p>
+                                <p class="card-text" style="font-weight: bolder;"> Company: {{$vacancy->employer->company_name}}</p>
+                                <a href="/vacancy/{{$vacancy->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
+                                <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card mb-4" >
-                        <div class="card-body">
-                            <h5 class="card-title"  style="font-weight: bold;">Vacancy : Python </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Last changes in 27.05.2020</h6>
-                            <p class="card-text"  style="font-weight: bolder;"> Company: BI group</p>
-                            <a href="#" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; ">More details</a>
-                            <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
-                        </div>
-                    </div>
-                    <div class="card mb-4" >
-                        <div class="card-body">
-                            <h5 class="card-title"  style="font-weight: bold;">Vacancy : Middle PHP Developer</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Last changes in  27.09.2020</h6>
-                            <p class="card-text"  style="font-weight: bolder;">  Company: BI group</p>
-                            <a href="#" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; ">More details</a>
-                            <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="col-md-3">
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Alibi Toktassyn</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-
-                        </div>
-                        <div class="body">
-                            <div class="title">Python Developer</div>
-                        </div>
-                    </div>
-
+                    @foreach($resumes as $resume)
                         <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Aidana Assysbekova</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
+                            <div class="header">
+                                <div class="left">
+                                <div class="count">{{$resume->student->surname}}</div>
+                                <div class="title"><a href="/resume/{{$resume->id}}" >Open resume</a></div>
+                                </div>
+
                             </div>
-
-                        </div>
-                        <div class="body">
-                            <div class="title">Middle C# Developer</div>
-                        </div>
-                    </div>
-
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Serik Sultanbek</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
+                            <div class="body">
+                                <div class="title">{{$resume->description}}</div>
+                                <div class="title">{{$resume->salary}}</div>
                             </div>
-
                         </div>
-                        <div class="body">
-                            <div class="title"> Junior System Analyst</div>
-                        </div>
-                    </div>
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Aya Sapakova</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-
-                        </div>
-                        <div class="body">
-                            <div class="title">Middle Java Developer</div>
-                        </div>
-                    </div>
-
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Zamanbek Turukbaev</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-
-                        </div>
-                        <div class="body">
-                            <div class="title"> Junior System Analyst</div>
-                        </div>
-                    </div>
-
-
+                    @endforeach
                 </div>
 
         </div>

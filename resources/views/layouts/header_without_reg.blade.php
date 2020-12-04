@@ -16,7 +16,7 @@
                     </li>
                 </ul>
 
-                    <a href="./resume.html"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
+                    <a href="{{ route('resume_create') }}"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
                     <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
 
 

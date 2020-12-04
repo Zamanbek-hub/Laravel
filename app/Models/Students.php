@@ -12,4 +12,9 @@ class Students extends Model
     public function resumes(){
         return $this->hasMany('App\Models\Resumes');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User');
+    }
 }

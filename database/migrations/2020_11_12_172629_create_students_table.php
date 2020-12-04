@@ -18,6 +18,8 @@ class CreateStudentsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('surname');
+            $table->string('phone_number');
+            $table->integer('grade');
             $table->bigInteger('user_id')->unsigned();
             
             $table->foreign('user_id')

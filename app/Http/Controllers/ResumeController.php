@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Resumes;
+use App\Models\Selected_Resumes;
 use App\Models\Students;
 use App\Models\Specialties;
 use App\Models\Resume_skills;
@@ -42,31 +45,35 @@ class ResumeController extends Controller
        $resume->email=request('email');
        $resume->phone_number=request('phone_number');
        $resume->url_portfolio=request('url_portfolio');
-     //  $resume->spec_id=request('spec_id');
+    //   $resume->spec_id=request('spec_id');
        $resume->salary=request('salary');
        $resume->description=request('description');
-       $resume->view_count=0;
+       $resume->view_count=1;
        $resume->resume_text=request('description');
-       error_log($req   ->cookie('mycookie'));
+    $skills = request('skills');
+    error_log("skills = ");   
+    foreach ($skills as $skill) {
+        error_log($skill);  
+    }
    // здесь айди студента нужно взять из таблицы юзерс и 
    //проверить есть ли такой студент прежде чем добавить его резюме 
 
        $resume->student_id=1;
-   
-       $resume->save();
+       
+    //    $resume->save();
 
-       $vacSkills= new Resume_skills();
-       $vacSkills->skill_id=1;
-       $vacSkills->resume_id=$resume->id;
-       $vacSkills->save(); 
+    //    $vacSkills= new Resume_skills();
+    //    $vacSkills->skill_id=1;
+    //    $vacSkills->resume_id=$resume->id;
+    //    $vacSkills->save(); 
 
-       $vacSkills1= new Resume_skills();
-       $vacSkills1->skill_id=2;
-       $vacSkills1->resume_id=$resume->id;
-       $vacSkills1->save(); 
+    //    $vacSkills1= new Resume_skills();
+    //    $vacSkills1->skill_id=2;
+    //    $vacSkills1->resume_id=$resume->id;
+    //    $vacSkills1->save(); 
 
        error_log($resume);
-       return redirect('/resume');   
+       return redirect('/home');   
 
    }
 
@@ -84,6 +91,18 @@ class ResumeController extends Controller
     //    error_log($arr);
       return view('resumes.show',['resume'=>$resume,'specialties'=>$specialties]);   
    }
+
+
+   public function select(){
+    $select = new Selected_Resumes();
+    $select->request_text = 'fd';
+    $select->seen_status = false;
+    $select->vacancy_id = 1;
+    $select->resume_id = request('resume_id');
+
+    $select->save();
+    return redirect('/home');
+    }
 
    public function destroy($id){
        $resume = Resumes::findOrFail($id);

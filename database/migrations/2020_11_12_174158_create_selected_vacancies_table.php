@@ -19,15 +19,11 @@ class CreateSelectedVacanciesTable extends Migration
             $table->string('response_text');  
             $table->boolean('seen_status');
             $table->bigInteger('vacancy_id')->unsigned();
-            $table->bigInteger('resume_id')->unsigned();
+           
 
             $table->foreign('vacancy_id')
             ->references('id')
             ->on('vacancies')
-            ->onCascade('delete');
-            $table->foreign('resume_id')
-            ->references('id')
-            ->on('resumes')
             ->onCascade('delete');
         });
     }

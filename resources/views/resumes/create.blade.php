@@ -26,7 +26,7 @@
                         <div class="profile_form">
                             <h3>1. Tell us who you are?</h3>
                             <div>
-                                <input type="text" value="{{$student->name}}  {{$student->surname}}" name="full_name" placeholder="Full name" required>
+                                <input type="text" value="" name="full_name" placeholder="Full name" required>
                             </div>
                             <br/>
                             <div>
@@ -45,7 +45,7 @@
 
                         <div class="specialist_form">
                             <h3>2.You're skilled as a...</h3>
-                            
+                            <!-- <input type="text" value="" name="spec_id" placeholder="Specialty" required> -->
                             <div>
                                 <select name="spec_id" style="width:400px;">
                                 @if(count($specs)!=0)
@@ -113,14 +113,11 @@
                 document.getElementById("skills").innerHTML += 
                 `<div class="particular_skill" id="particular_skill_${addSkillInput.value}">
                     <input type="text" value="${addSkillInput.value}" name="ggg" disabled>
+                    <input type="checkbox" value="${addSkillInput.value}" name="skills[]" checked>
                     <span class="particular_skill_remove" onclick="removeSkill('particular_skill_${addSkillInput.value}')">
                         <i class="far fa-trash-alt"></i>
                         </span>
                 </div>`
-                var arr = [];
-                arr.push(addSkillInput.value);
-                var json_str = JSON.stringify(arr);
-                createCookie('mycookie', json_str);
             }
 
             addSkillInput.value = "";

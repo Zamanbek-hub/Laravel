@@ -20,4 +20,6 @@ class Vacancies extends Model
     public function skills(){
         return $this->belongsToMany('App\Models\Skills');
     }
+
+    
 }

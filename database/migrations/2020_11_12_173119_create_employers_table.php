@@ -18,8 +18,6 @@ class CreateEmployersTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('phone_number');
-            $table->string('password');
-            $table->string('description');
             $table->string('company_name');
             $table->bigInteger('region_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();

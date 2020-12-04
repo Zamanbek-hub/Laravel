@@ -23,22 +23,27 @@
                             <form  method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" id="e1" class="form-control" placeholder="Surname">
+                                    <input type="text" id="surname" class="form-control" name="surname" placeholder="Surname">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="e1" class="form-control" name="name" placeholder="Name">
+                                    <input type="text" id="name" class="form-control" name="name" placeholder="Name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="e1" class="form-control" name="email" placeholder="Email Address">
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email Address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" id="e1" class="form-control" placeholder="Phone number" pattern="[7-8]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required>
+                                    <input type="tel" id="phone_number" class="form-control" name="phone_number" placeholder="Phone number" pattern="[7-8]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="e1" class="form-control" placeholder="Company Name ">
+                                    <input type="text" id="company_name" class="form-control" name="company_name" placeholder="Company Name ">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="e1" class="form-control" placeholder="Region ">
+                                
+                                    <select type="text" id="region" class="form-control" name="region" placeholder="Region ">
+                                    
+                                        <option value="1">Алматы</option>
+                                  
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="new-password">

@@ -24,8 +24,8 @@
 
                 <div class="card mb-4" >
                     <div class="card-body"> 
-                        <h5 class="card-title mt-3 mb-3" align="center" style="font-weight: bold; "> Resume </h5>
-                        <p class="card-text" > Fullname:<span style="font-weight: bolder;"> {{$resume->full_name}}  </span></p>
+                        <h5 class="card-title mt-3 mb-3" style="text-align : center" style="font-weight: bold; "> Resume </h5>
+                        <p class="card-text" > Fullname:<span style="font-weight: bolder;"> {{$resume->full_name}} {{$resume->student->fullname}} </span></p>
 
                         <p class="card-text" style="font-weight: bolder;">
                             @foreach($specialties as $sp)
@@ -37,7 +37,7 @@
                         <p class="card-text" > Salary:<span style="font-weight: bolder;"> {{$resume->salary}} KZT  </span></p>
                         <p class="card-text" > Email:<span style="font-weight: bolder;"> {{$resume->email}}  </span></p>
 
-                        <p class="card-text" > Telephone number:<span style="font-weight: bolder;"> <em>{{$resume->phone_number}} </em> </span></p>
+                        <p class="card-text" > Telephone number:<span style="font-weight: bolder;"> <em>7-708-050-52-67 </em> </span></p>
                         <p class="card-text" > Portfolio URL:<span style="font-weight: bolder;"> {{$resume->url_portfolio}}  </span></p>
                         <p class="card-text mb-4" > About myself:<span style="font-weight: bolder;"> {{$resume->description}}  </span></p>
 
@@ -47,12 +47,19 @@
                         @method('DELETE')
                             <button type="submit" class="btn btn-outline-danger mt-2 " type="button" style="color: black; border-color: grey; "> Delete</buttom>
                         </form>
+
+                        <form action="/resume_select" method="post">
+                        @csrf
+                        @method('POST')
+                            <input type="hidden" name="resume_id" value="{{$resume->id}}">
+                            <button type="submit" class="btn btn-primary mt-2 " type="button" style="color: black; border-color: grey; ">Favorite</buttom>
+                        </form>
                     </div>
                     <div class="card-footer">
                         <p class="card-subtitle mb-2 text-muted" >Last changes in {{$resume->updated_at}}</p>
                     </div>
                 </div>
-                <form action="/resume/update" method="post">
+                <!-- <form action="/resume/update" method="post">
                     @csrf 
                         <h3 class="title mb-3">Editing</h3>
                         <div class="profile_form">
@@ -108,7 +115,7 @@
                         </div>
                         <br/>
                         <button class="btn btn-outline-warning">Save</button>
-                    </form>
+                    </form> -->
           </div>
           <div class="col-md-3">
               <div class="tile wide quote">

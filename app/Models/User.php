@@ -10,8 +10,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-    public function students(){
-        return $this->hasMany('App\Models\Students');
+    public function student(){
+        return $this->hasOne('App\Models\Students');
+    }
+
+
+    public function employer(){
+        return $this->hasOne('App\Models\Students');
     }
     /**
      * The attributes that are mass assignable.
@@ -22,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
