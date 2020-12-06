@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\VacancyController;
-
+use App\Http\Controllers\FavoriteResumeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +73,7 @@ Route::post('/vacancy/update', [VacancyController::class, 'update'] );
 
 Route::post('/resume_select', [ResumeController::class, 'select'] );
 Route::post('/selected_resumes', [HomeController::class, 'selected_resumes'] );
+
+
+
+Route::post('/save_favorite_resume', [FavoriteResumeController::class, 'saveFavoriteResume'] );

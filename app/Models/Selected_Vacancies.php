@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Selected_Resumes extends Model
+class Selected_Vacancies extends Model
 {
     use HasFactory;
 
@@ -13,9 +13,7 @@ class Selected_Resumes extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function resume(){
-        return $this->belongsTo('App\Models\Resumes');
+    public function vacancy(){
+        return $this->belongsTo('App\Models\Vacancies');
     }
-
-  
 }

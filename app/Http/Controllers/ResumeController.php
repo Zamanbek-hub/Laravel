@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Favorite_Resumes;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -38,18 +40,16 @@ class ResumeController extends Controller
   }
 
   public function store(Request $req){
-
-
-       $resume=new Resumes();
-       $resume->full_name=request('full_name');
-       $resume->email=request('email');
-       $resume->phone_number=request('phone_number');
-       $resume->url_portfolio=request('url_portfolio');
-    //   $resume->spec_id=request('spec_id');
-       $resume->salary=request('salary');
-       $resume->description=request('description');
-       $resume->view_count=1;
-       $resume->resume_text=request('description');
+    $resume=new Resumes();
+    $resume->full_name=request('full_name');
+    $resume->email=request('email');
+    $resume->phone_number=request('phone_number');
+    $resume->url_portfolio=request('url_portfolio');
+//  $resume->spec_id=request('spec_id');
+    $resume->salary=request('salary');
+    $resume->description=request('description');
+    $resume->view_count=1;
+    $resume->resume_text=request('description');
     $skills = request('skills');
     error_log("skills = ");   
     foreach ($skills as $skill) {
@@ -128,4 +128,5 @@ class ResumeController extends Controller
        error_log($resume);
        return redirect('/resume');   
    }
+
 }

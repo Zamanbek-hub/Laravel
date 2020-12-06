@@ -18,8 +18,13 @@ class CreateSelectedResumesTable extends Migration
             $table->timestamps();
             $table->string('request_text');  
             $table->boolean('seen_status');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('resume_id')->unsigned();
-
+            
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onCascade('delete');
             $table->foreign('resume_id')
             ->references('id')
             ->on('resumes')

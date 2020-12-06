@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Employers;
 use App\Models\Resumes;
 use App\Models\Vacancies;
 use App\Models\Selected_Resumes;
+use App\Models\Students;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -26,21 +31,50 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $vacancies = Vacancies::orderBY('view_count', 'desc')->get();
-        error_log($vacancies);
-        $resumes = Resumes::orderBY('view_count', 'desc')->get();
-
-        return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+        
+        error_log(Auth::user()->name);
+        error_log(Auth::user()->role);
+        if(Auth::user()->role === 'student'){
+            error_log("Student");
+            $student = Students::where('user_id', Auth::user()->id)->firstOrFail();
+            error_log($student);
+            error_log("id=".$student->id);
+            $resumes = Resumes::where('student_id', $student->id)->get();
+            $vacancies = Vacancies::orderBy('id', 'desc')->take(3)->get();
+            return view('home_students', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+        }
+        else if(Auth::user()->role === 'employer'){
+            error_log("Employer");
+            $employer = Employers::where('user_id', Auth::user()->id)->firstOrFail();
+            $resumes = Resumes::orderBy('id', 'desc')->take(3)->get();
+            $vacancies = Vacancies::where('employer_id', $employer->id)->get();
+            return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+        }
+        else {
+            error_log("403");
+            return view('403');
+        }
     }
 
     public function selected_resumes(){
-        $selected = Selected_Resumes::where('resume_id');
-        $resumes = Resumes::all();
-
-        for($i =0; $i < count($resumes); $i++){
-
+        if(Auth::user()->role === 'stude'){
+            error_log("Student");
+            $resumes = Resumes::where('employer_id', auth()->user->id)->get();
+            $vacancies = Vacancies::orderBy('id', 'desc')->take(3)->get();
+            return view('home_students', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+        }
+        else if(Auth::user()->role === 'employer'){
+            error_log("Employer");
+            $resumes = Resumes::orderBy('id', 'desc')->take(3)->get();
+            $vacancies = Vacancies::where('employer_id', auth()->user->id)->get();
+            return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+        }
+        else {
+            error_log("403");
+            return view('403');
         }
 
-        return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+
+        
     }
 }

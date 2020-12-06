@@ -7,6 +7,22 @@ ul {
     list-style-type: none;
 }
 
+
+.star {
+    visibility:hidden;
+    font-size:30px;
+    cursor:pointer;
+}
+.star:before {
+   content: "\2606";
+   position: absolute;
+   visibility:visible;
+}
+.star:checked:before {
+   content: "\2605";
+   position: absolute;
+}
+
 /* ####################### Header ####################### */
 
 header{
@@ -319,5 +335,8 @@ footer section{
         font-size:12px;
     }
 }
+
+
+
 
 

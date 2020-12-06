@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSelectedVacanciesTable extends Migration
+class CreateFavoriteVacanciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateSelectedVacanciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('selected_vacancies', function (Blueprint $table) {
+        Schema::create('favorite_vacancies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('response_text');  
-            $table->boolean('seen_status');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('vacancy_id')->unsigned();
            
@@ -40,6 +38,6 @@ class CreateSelectedVacanciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('selected_vacancies');
+        Schema::dropIfExists('favorite_vacancies');
     }
 }

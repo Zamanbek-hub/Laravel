@@ -24,6 +24,10 @@
 
                 <div class="card mb-4" >
                     <div class="card-body"> 
+
+                        <input class="star" id="favorite" type="checkbox" title="bookmark page" onchange="saveFavoriteResume()">
+                        <span id="favorite_text"></span>
+                        <br/><br/>
                         <h5 class="card-title mt-3 mb-3" style="text-align : center" style="font-weight: bold; "> Resume </h5>
                         <p class="card-text" > Fullname:<span style="font-weight: bolder;"> {{$resume->full_name}} {{$resume->student->fullname}} </span></p>
 
@@ -51,8 +55,7 @@
                         <form action="/resume_select" method="post">
                         @csrf
                         @method('POST')
-                            <input type="hidden" name="resume_id" value="{{$resume->id}}">
-                            <button type="submit" class="btn btn-primary mt-2 " type="button" style="color: black; border-color: grey; ">Favorite</buttom>
+                            <input type="hidden" name="resume_id" value="{{$resume->id}}" id="resume_id">
                         </form>
                     </div>
                     <div class="card-footer">
@@ -193,6 +196,38 @@
   
 </div>
 </div>
+
+
+<script type="text/javascript">
+        const url = '/save_favorite_resume';
+        
+        async function saveFavoriteResume (){
+            try {
+                
+                const data = { 
+                  _token: document.getElementsByName("_token")[0].value,
+                  resume_id: document.getElementById('resume_id').value
+                  };
+                
+                console.log(data._token);
+                console.log(data.resume_id);
+                const response = await fetch(url, {
+                    method: 'POST', // или 'PUT'
+                    body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                });
+
+                
+                const json = await response.json();
+                console.log('Успех:', JSON.stringify(json));
+                document.getElementById('favorite_text').innerHTML = JSON.stringify(json['success']);
+                } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        }
+    </script>
 
 
 
