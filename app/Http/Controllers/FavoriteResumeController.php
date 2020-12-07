@@ -16,9 +16,6 @@ class FavoriteResumeController extends Controller
      /// Favorite Resume Ajax
    public function saveFavoriteResume()
    {    
-
-
-        
     try{
         $user = Auth::user();
         $resume = Resumes::where('id', request('resume_id'))->first();
