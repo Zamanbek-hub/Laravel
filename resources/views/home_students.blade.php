@@ -39,8 +39,8 @@
                             <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
                                     <span class="material-icons" style="margin-right:5px; ">apartment</span> BI group company
                             </a>
-                            <a href="/selected_resumes" class="list-group-item list-group-item-action d-flex">
-                                <span class="material-icons" style="margin-right:5px;">star_outline</span>Selected resume
+                            <a href="/favorites" class="list-group-item list-group-item-action d-flex">
+                                <span class="material-icons" style="margin-right:5px;">star_outline</span>Favorite vacancy
                             </a>
                             <a href="#" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">contact_mail</span>My responses
@@ -59,7 +59,7 @@
                             <div class="card-body">
                                 <h5 class="card-title" style="font-weight: bold;">Resume :{{$resume->description}}</h5>
                                 <p class="card-subtitle mb-2 text-muted" >Last changes in {{$resume->updated_at}}</p>
-                                <p class="card-text" style="font-weight: bolder;"> Company: {{$resume->student->name}}</p>
+                                <p class="card-text" style="font-weight: bolder;"> Name: {{$resume->student->name}}</p>
                                 <a href="/resume/{{$resume->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
                                 <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
                             </div>

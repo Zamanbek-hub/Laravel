@@ -12,6 +12,8 @@ use App\Models\Resumes;
 use App\Models\Specialties;
 use App\Models\Vacancies;
 
+use PDF;
+
 
 class VacancyController extends Controller{
 
@@ -93,7 +95,7 @@ class VacancyController extends Controller{
         $vacancy =Vacancies::findOrFail($id);
         $employer = Employers::findOrFail(1);
         $specialties = DB::table('specialties')->get();
-
+        // $specialties = [];
        return view('vacancies.show',compact('vacancy'),['specialties'=>$specialties,'emp'=>$employer]);   
     }
 

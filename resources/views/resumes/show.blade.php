@@ -24,8 +24,10 @@
 
                 <div class="card mb-4" >
                     <div class="card-body"> 
-
+                        @if(auth()->user()->role==='employer')
                         <input class="star" id="favorite" type="checkbox" title="bookmark page" onchange="saveFavoriteResume()">
+                        @endif
+                        
                         <span id="favorite_text"></span>
                         <br/><br/>
                         <h5 class="card-title mt-3 mb-3" style="text-align : center" style="font-weight: bold; "> Resume </h5>
@@ -56,13 +58,14 @@
                             @endif
                           </div>
                         <p class="card-text mb-4" > About myself:<span style="font-weight: bolder;"> {{$resume->description}}  </span></p>
-
-                        <form action="/resume/{{$resume->id}}" method="post">
+                      
+                        <form action="/resume/{{$resume->id}}" method="post" class="mb-2">
                         @csrf
                         @method('DELETE')
                             <button type="submit" class="btn btn-outline-danger mt-2 " type="button" style="color: black; border-color: grey; "> Delete</buttom>
                         </form>
-
+                        
+                        <a href="/resume_pdf?id={{$resume->id}}"><button class="btn btn-primary">Download</button></a>
                         <form action="/resume_select" method="post">
                         @csrf
                         @method('POST')
@@ -199,11 +202,11 @@
 
           </div>
             
-  </div>
+  <!-- </div>
     <hr style="color: #343434;">
     <div class="d-flex justify-content-center">
       <a href="#" class="btn btn-outline-warning mb-5" type="button" style="color: black; border-color: grey; ">Recommendations</a>
-  </div>
+  </div> -->
   
 </div>
 </div>

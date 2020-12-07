@@ -15,10 +15,21 @@
                     <a class="nav-link" href="#">To job seekers</a>
                     </li>
                 </ul>
-                    if()
-                    <a href="{{ route('resume_create') }}"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
-                    <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
+                @if(auth()->user())
+                      <h3>{{auth()->user()->email}}</h3>
 
+                    @if(auth()->user()->role==='student')
+                        <a href="./resume.html"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
+                    @else
+                        <a href="./resume.html">
+                        <button class="btn my-2 my-sm-0" type="submit">Create Vacancy</button>
+                    </a>
+                    @endif   
+                @else
+
+                @endif
+
+                <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
 
                     @if (Route::has('login'))
 

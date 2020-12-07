@@ -35,11 +35,22 @@
                     @foreach($favorites as $favorite)
                         <div class="card mb-4" >
                             <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">Vacancy :{{$favorite->description}}</h5>
-                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$favorite->updated_at}}</p>
-                                <p class="card-text" style="font-weight: bolder;"> Company: {{$favorite->employer->company_name}}</p>
-                                <a href="/vacancy/{{$vacancy->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
-                                <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
+                                
+
+                                @if(auth()->user()->role==='student')
+                                <h5 class="card-title" style="font-weight: bold;">Vacancy :{{$favorite->vacancy->description}}</h5>
+                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$favorite->vacancy->updated_at}}</p>
+                                <p class="card-text" style="font-weight: bolder;"> Company: {{$favorite->vacancy->employer->company_name}}</p>
+                                <a href="/vacancy/{{$favorite->vacancy->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
+                                @else
+                                <h5 class="card-title" style="font-weight: bold;">Resume :{{$favorite->resume->description}}</h5>
+                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$favorite->resume->updated_at}}</p>
+                                <p class="card-text" style="font-weight: bolder;"> Name: {{$favorite->resume->student->name}}</p>
+                                <a href="/vacancy/{{$favorite->resume->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
+                                @endif
+                                
+                                
+                                
                             </div>
                         </div>
                     @endforeach
