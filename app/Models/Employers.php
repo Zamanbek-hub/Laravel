@@ -11,7 +11,12 @@ class Employers extends Model
 
     protected $guarded = [];  
 
-    public function resumes(){
+    
+    public function vacancies(){
         return $this->hasMany('App\Models\Vacancies');
+    }
+
+    public function region(){
+        return $this->belongsTo('App\Models\Regions');
     }
 }

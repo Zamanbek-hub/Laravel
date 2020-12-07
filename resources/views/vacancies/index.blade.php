@@ -13,6 +13,27 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/b8d631eee1.js" crossorigin="anonymous"></script>
+    <style>
+      .bs-callout {
+        padding: 10px;
+        margin: 20px 0;
+        border: 1px solid #eee;
+        border-left-width: 5px;
+        border-radius: 3px;
+      }
+      .bs-callout-warning {
+      border-left-color: #f0ad4e;
+      }
+
+      .bs-callout h6 {
+        margin-top: 0;
+        margin-bottom: 5px;
+      }
+
+      .bs-callout-warning h6 {
+      color: #f0ad4e;
+      }
+ </style>
 @endsection
 
 @section('content')
@@ -61,11 +82,14 @@
                         <div class="card mb-4" >
                             <div class="card-body">
                                 <h5 class="card-title" style="font-weight: bold;">Vacancy : 
-                                    @foreach($specialties as $spec)
-                                        @if($vacancies[$i]->spec_id==$spec->id)
-                                            {{ $spec->name}}
+                                @if(count(($vacancies[$i])->specialties)!=0)
+                                    @for( $j=0; $j<count($vacancies[$i]->specialties); $j++)
+                                            {{$vacancies[$i]->specialties[$j]->name}} 
+                                            @if($j!=count(($vacancies[$i]->specialties))-1)
+                                            ,
                                         @endif
-                                    @endforeach
+                                    @endfor
+                                @endif
                                 </h5>
                                 <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancies[$i]->updated_at}}</p>
                                 <p class="card-text" style="font-weight: bolder;"> Company: {{$employer[0]->company_name}}</p>
@@ -146,8 +170,39 @@
         </div>
             <hr style="color: #343434;">
             <div class="d-flex justify-content-center">
-            <a href="#" class="btn btn-outline-warning mb-5" type="button" style="color: black; border-color: grey; ">Recommendations</a>
-        </div>
+                <button class="btn btn-outline-warning mb-5" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="color: black; border-color: grey; ">
+                Recommendations
+                </button>
+            </div>
+            <div class="collapse" id="collapseExample">
+              <div class="container">
+                <div class="row">
+                @if(count($resumes)!=0)
+                  @foreach($resumes as $resume)
+                    <div class="col-4">
+                      <div class="bs-callout bs-callout-warning">
+                          <h6>
+                              @for($i=0; $i<count(($resume->specialties)); $i++)
+                                {{$resume->specialties[$i]->name}}
+                                  @if($i!=count(($resume->specialties))-1)
+                                      ,
+                                  @endif
+                              @endfor
+                          </h6>
+                          <p style="font-size:14px;"> {{$resume->full_name}}</p>
+                          <p><span style="color: #383434; font-size:16px;">  Email:  <em>{{$resume->email}}  </em></span></p>
+                      </div>
+                    </div>
+                  @endforeach  
+                @endif 
+                  
+                </div>
+              </div>
+
+
+
+              
+            </div>
         
         </div>
     </div>

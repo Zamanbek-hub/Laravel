@@ -43,9 +43,20 @@
 
                         <p class="card-text" > Telephone number:<span style="font-weight: bolder;"> <em>7-708-050-52-67 </em> </span></p>
                         <p class="card-text" > Portfolio URL:<span style="font-weight: bolder;"> {{$resume->url_portfolio}}  </span></p>
+                        <div>
+                              @if(count($resume->skills)!=0)
+                              <p class="card-text" > Skills: </p>
+                                  <ul class="d-flex">
+                                    @foreach($resume->skills as $skill)
+                                      <li class="d-flex" style="margin-left:30px; font-weight: bolder; border: 1px solid lightgrey; background-color: lightgrey;">{{ $skill->name }}</li>
+                                    @endforeach
+                                  </ul>
+                              @else
+                              <p class="card-text" > Skills: <em>no skills</em> </p>
+                            @endif
+                          </div>
                         <p class="card-text mb-4" > About myself:<span style="font-weight: bolder;"> {{$resume->description}}  </span></p>
 
-                        <!-- <a href="" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> Edit</a> -->
                         <form action="/resume/{{$resume->id}}" method="post">
                         @csrf
                         @method('DELETE')

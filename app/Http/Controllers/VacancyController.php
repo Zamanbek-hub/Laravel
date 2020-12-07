@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Models\Employers;
 use App\Models\User;
+use App\Models\Skills;
+use App\Models\Resumes;
 
+use App\Models\Specialties;
 use App\Models\Vacancies;
-use App\Models\Vacansy_skills;
+
 
 class VacancyController extends Controller{
 
@@ -16,10 +19,39 @@ class VacancyController extends Controller{
         $user = User::findOrFail(2);
 
         $employer = Employers::where('user_id',$user->id)->get();
-        $vacs = Vacancies::where('employer_id',$employer[0]->id)->get();
+        $vacancies = Vacancies::where('employer_id',$employer[0]->id)->get();
+
+        $count=0;
+        $ress=array();
+        $resumeS = Resumes::get();
+        foreach($vacancies as $vac){
+          foreach($vac->specialties as $sp){
+            for($i=0; $i<count($resumeS); $i++){
+              foreach($resumeS[$i]->specialties as $spec){
+                if($sp->id==$spec->id){
+                    $count++;
+                }
+              }
+              if($count>0){
+                $c=0;
+                for($j=0; $j<count($ress); $j++){
+                  if($ress[$j]->id==$resumeS[$i]->id){
+                    $c++;
+                  }
+                }
+                if($c==0){
+
+                  array_push($ress, $resumeS[$i]);
+                }
+                $c=0;
+              }
+              $count=0;
+            }
+          }
+        }
 
         $specialties = DB::table('specialties')->get();
-       return view('vacancies.index',['vacancies'=>$vacs,'specialties'=>$specialties,'employer'=>$employer]);   
+       return view('vacancies.index',compact('vacancies'),['employer'=>$employer,'resumes'=>$ress]);   
    }
 
    public function create(){
@@ -27,7 +59,6 @@ class VacancyController extends Controller{
         $employer = Employers::where('user_id',$user->id)->get();
         $specialties = DB::table('specialties')->orderBy('name','asc')->get();
         return view('vacancies.create',['emp'=>$employer,'specialties'=>$specialties,'user'=>$user]); 
-
    }
 
    public function store(){
@@ -38,7 +69,6 @@ class VacancyController extends Controller{
         $vacancy->email=request('email');
         $vacancy->phone_number=request('phone_number');
         $vacancy->description=request('description');
-      //  $vacancy->spec_id=request('spec_id');
         $vacancy->salary=request('salary');
         $vacancy->view_count=0;
         $vacancy->employer_id=1;
@@ -48,17 +78,11 @@ class VacancyController extends Controller{
 
         $vacancy->save();
 
-       
-        $vacSkills= new Vacansy_skills();
-        $vacSkills->skill_id=1;
-        $vacSkills->vacancy_id=$vacancy->id;
-        $vacSkills->save(); 
+        $skills = Skills::find([3, 4,2]);  
+        $vacancy->skills()->attach($skills);
 
-        $vacSkills1= new Vacansy_skills();
-        $vacSkills1->skill_id=2;
-        $vacSkills1->vacancy_id=$vacancy->id;
-        $vacSkills1->save(); 
-
+        $specs = Specialties::find([1,4,2]);  
+        $vacancy->specialties()->attach($specs);
         error_log($vacancy);
 
 
@@ -70,13 +94,19 @@ class VacancyController extends Controller{
         $employer = Employers::findOrFail(1);
         $specialties = DB::table('specialties')->get();
 
-      
-      //  error_log($arr);
-       return view('vacancies.show',['vacancy'=>$vacancy,'specialties'=>$specialties,'emp'=>$employer]);   
+       return view('vacancies.show',compact('vacancy'),['specialties'=>$specialties,'emp'=>$employer]);   
     }
 
     public function destroy($id){
         $vacancy = Vacancies::findOrFail($id);
+
+        foreach($vacancy->skills as $sk){
+            $vacancy->skills()->detach($sk);
+         }
+
+        foreach($vacancy->specialties as $sp){
+            $vacancy->specialties()->detach($sp);
+        }
 
         $vacancy->delete();
        return redirect('/vacancy');   
@@ -91,16 +121,14 @@ class VacancyController extends Controller{
         $vacancy->email=request('email');
         $vacancy->phone_number=request('phone_number');
         $vacancy->description=request('description');
-    //    $vacancy->spec_id=request('spec_id');
+
         $vacancy->salary=request('salary');
-        //$vacancy->view_count=0;
+
         $vacancy->employer_id=1;
         $ldate = date('Y-m-d H:i:s');
         $vacancy->updated_at=$ldate;
 
         
-
-
         $vacancy->save();
               
 

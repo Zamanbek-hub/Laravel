@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Regions extends Model
 {
     use HasFactory;
+
+    public function employers(){
+        return $this->hasMany('App\Models\Employers');
+    }
 }

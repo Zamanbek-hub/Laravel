@@ -11,23 +11,58 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Resumes;
 use App\Models\Selected_Resumes;
+use App\Models\Skills;
 use App\Models\Students;
 use App\Models\Specialties;
 use App\Models\Resume_skills;
 use App\Models\User;
+use App\Models\Vacancies;
 
 
 class ResumeController extends Controller
 {
     public function index(){
           // здесь айди студента нужно взять из таблицы юзерс и 
+          
         $user= User::findOrFail(1);
         $student = Students::where('user_id',$user->id)->get();
 
         $resumes = Resumes::where('student_id',$student[0]->id)->get();
+
+        
+        $count=0;
+        $vacs=array();
+        $vacancies = Vacancies::get();
+        foreach($resumes as $res){
+          foreach($res->specialties as $sp){
+            for($i=0; $i<count($vacancies); $i++){
+              foreach($vacancies[$i]->specialties as $spec){
+                if($sp->id==$spec->id){
+                    $count++;
+                }
+              }
+              if($count>0){
+                $c=0;
+                for($j=0; $j<count($vacs); $j++){
+                  if($vacs[$j]->id==$vacancies[$i]->id){
+                    $c++;
+                  }
+                }
+                if($c==0){
+                  array_push($vacs, $vacancies[$i]);
+                }
+                $c=0;
+              }
+              $count=0;
+            }
+          }
+        }
+
+        
+
         
         $specialties = DB::table('specialties')->get();
-       return view('resumes.index',['resumes'=>$resumes,'specialties'=>$specialties, 'student'=>$student]);   
+       return view('resumes.index',['student'=>$student,'vacs'=>$vacs],compact('resumes'));   
    }
 
 
@@ -62,15 +97,12 @@ class ResumeController extends Controller
        
     //    $resume->save();
 
-    //    $vacSkills= new Resume_skills();
-    //    $vacSkills->skill_id=1;
-    //    $vacSkills->resume_id=$resume->id;
-    //    $vacSkills->save(); 
+       //many to many / instead of $skills we must get skills list from post method
+       $skills = Skills::find([3, 4,1,2]);  
+       $resume->skills()->attach($skills);
 
-    //    $vacSkills1= new Resume_skills();
-    //    $vacSkills1->skill_id=2;
-    //    $vacSkills1->resume_id=$resume->id;
-    //    $vacSkills1->save(); 
+       $specs = Specialties::find([1,4,3]);  
+       $resume->specialties()->attach($specs);
 
        error_log($resume);
        return redirect('/home');   
@@ -80,16 +112,8 @@ class ResumeController extends Controller
    public function show($id){
        $resume = Resumes::findOrFail($id);
        $specialties = DB::table('specialties')->get();
-      // $roles = App\Models\Resumes::find(1)->specialties()->orderBy('name')->get();
-    //    $specResumes=DB::table('specialty_resume')->where('resume_id',$id)->get();
-    //    $arr=array();
-    //    foreach($specResumes as $sp){
-    //        if(Specialties::findOrFail($sp->specialty_id)){
-    //         array_push(Specialties::where('specialty_id',$sp->specialty_id)->get(), $arr);
-    //        }
-    //    }
-    //    error_log($arr);
-      return view('resumes.show',['resume'=>$resume,'specialties'=>$specialties]);   
+
+       return view('resumes.show',compact('resume'),['specialties'=>$specialties]);   
    }
 
 
@@ -107,6 +131,13 @@ class ResumeController extends Controller
    public function destroy($id){
        $resume = Resumes::findOrFail($id);
 
+       foreach($resume->skills as $sk){
+        $resume->skills()->detach($sk);
+       }
+
+       foreach($resume->specialties as $sp){
+        $resume->specialties()->detach($sp);
+       }
        $resume->delete();
       return redirect('/resume');   
    }
@@ -114,12 +145,12 @@ class ResumeController extends Controller
    public function update(){
 
        $resume = Resumes::find(request('id'));
-       
+      
        $resume->full_name=request('full_name');
        $resume->email=request('email');
        $resume->phone_number=request('phone_number');
        $resume->url_portfolio=request('url_portfolio');
-    //   $resume->spec_id=request('spec_id');
+
        $resume->salary=request('salary');
        $resume->description=request('description');
        $resume->resume_text=request('description');

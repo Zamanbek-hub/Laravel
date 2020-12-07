@@ -27,6 +27,15 @@
                 <div class="card mb-4" >
                     <div class="card-body">
                         <h5 class="card-title mt-3 mb-3" align="center" style="font-weight: bold; "> Vacancy  </h5>
+                        @if(count($vacancy->specialties)!=0)
+                            <p class="card-text pr-2" > Specialty :  
+                                  @foreach($vacancy->specialties as $sp)
+                                    <span style="font-weight: bolder;">  {{ $sp->name }} , </span> 
+                                  @endforeach
+                                  </p>
+                            @else
+                            <p class="card-text mt-3" > Specialty: <em>no specialty</em> </p>
+                          @endif
                         <p class="card-text" > Name:<span style="font-weight: bolder;"> {{$vacancy->name}}  </span></p>
                         <p class="card-text" > Surname:<span style="font-weight: bolder;"> {{$vacancy->surname}}  </span></p>
                         <p class="card-text" > Email:<span style="font-weight: bolder;"> {{$vacancy->email}}  </span></p>
@@ -39,6 +48,18 @@
                             @endforeach
                         </p>
                         <p class="card-text" > Salary:<span style="font-weight: bolder;"> {{$vacancy->salary}} KZT  </span></p>
+                        <div>
+                              @if(count($vacancy->skills)!=0)
+                              <p class="card-text" > Skills: </p>
+                                  <ul class="d-flex">
+                                    @foreach($vacancy->skills as $skill)
+                                      <li class="d-flex" style="margin-left:30px; font-weight: bolder; border: 1px solid lightgrey; background-color: lightgrey;">{{ $skill->name }}</li>
+                                    @endforeach
+                                  </ul>
+                              @else
+                              <p class="card-text mb-2" > Skills: <em>no skills</em> </p>
+                            @endif
+                          </div>
                         <p class="card-text mb-4" > Other requirements and descriptions:
                             <textarea name="description" style="width: 700px; height: 250px; font-weight: bolder; background: white; border-color: white;" disabled>{{$vacancy->description}}
                             </textarea>
