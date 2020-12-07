@@ -32,36 +32,18 @@
         <div class="container mt-5">
             <div class="row ">
                 <div class="col-md-6">
-                    @foreach($vacancies as $vacancy)
+                    @foreach($favorites as $favorite)
                         <div class="card mb-4" >
                             <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">Vacancy :{{$vacancy->description}}</h5>
-                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancy->updated_at}}</p>
-                                <p class="card-text" style="font-weight: bolder;"> Company: {{$vacancy->employer->company_name}}</p>
+                                <h5 class="card-title" style="font-weight: bold;">Vacancy :{{$favorite->description}}</h5>
+                                <p class="card-subtitle mb-2 text-muted" >Last changes in {{$favorite->updated_at}}</p>
+                                <p class="card-text" style="font-weight: bolder;"> Company: {{$favorite->employer->company_name}}</p>
                                 <a href="/vacancy/{{$vacancy->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
                                 <a href="#" class="btn btn-outline-warning" type="button" style="color: black; border-color: grey;  margin: 8px;">Edit</a>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="col-md-3">
-                    @foreach($resumes as $resume)
-                        <div class="tile wide quote">
-                            <div class="header">
-                                <div class="left">
-                                <div class="count">{{$resume->student->surname}}</div>
-                                <div class="title"><a href="/resume/{{$resume->id}}" >Open resume</a></div>
-                                </div>
-
-                            </div>
-                            <div class="body">
-                                <div class="title">{{$resume->description}}</div>
-                                <div class="title">{{$resume->salary}}</div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
         </div>
             <hr style="color: #343434;">
             <div class="d-flex justify-content-center">
