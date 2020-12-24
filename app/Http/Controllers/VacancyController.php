@@ -146,8 +146,8 @@ class VacancyController extends Controller{
     public function show($id){
 
         $user_current=auth()->user();
-
-        if(!empty($user_current) && $user_current->role=='employer'){
+        error_log("user_current ==".$user_current);
+        if(!empty($user_current) && $user_current->role==='employer'){
             $user = User::findOrFail($user_current->id);
             $employer1 = Employers::where('user_id',$user->id)->get();
             $vacancy =Vacancies::findOrFail($id);

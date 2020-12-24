@@ -106,7 +106,7 @@
                         <div class="header">
                             <div class="left">
                             <div class="count">{{$tops->full_name}}</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
+                            <div class="title"><a href="/home_s/{{$tops->id}}" >Open R</a></div>
                         </div>
                         </div>
                         <div class="body">

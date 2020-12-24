@@ -12,6 +12,7 @@ use App\Models\Specialties;
 use App\Models\Resume_skills;
 use App\Models\User;
 use App\Models\Vacancies;
+use App\Models\Selected_Resumes;
 
 use PDF;
 
@@ -141,14 +142,15 @@ class ResumeController extends Controller
 
    public function show($id){
         $user_current=auth()->user();
-
-        if(!empty($user_current) && $user_current->role=='student'){
+        error_log("user_current ==".$user_current);
+        
+        if(!empty($user_current)){
             $user = User::findOrFail($user_current->id);
 
             $resume = Resumes::findOrFail($id);
             $student = Students::where('user_id',$user->id)->get();
             $specialties = DB::table('specialties')->get();
-            $vacanciesTop = Vacancies::orderBy('view_count','DESC')->skip(0)->take(2)->get();
+            $vacanciesTop = Vacancies::orderBy('view_count',' DESC')->skip(0)->take(2)->get();
 
             $studentResumes=Resumes::where('student_id',$student[0]->id)->get();
             if($studentResumes!=null){

@@ -17,7 +17,71 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
+
+
 class AdminController extends Controller{
+    public function statistic()
+    {
+        return view('admin.statistic');
+    }
+
+    
+    public function vacancyStat()
+    {    
+        // $vacancies = Vacancies::orderBy('created_at', 'asc')->get()->groupBy('name');
+        // error_log($vacancies);
+        $vacancies = DB::table('vacancies as v')
+                ->select(array(DB::Raw('count(v.id) as day_count'),DB::Raw('DATE(v.created_at) as created_at')))
+                ->groupBy('v.created_at')
+                ->orderBy('v.created_at')
+                ->get();
+
+
+        $vacancies->groupBy('v.created_at');
+        error_log("vacancies =".$vacancies);
+
+        $resumes = DB::table('resumes as r')
+                ->select(array(DB::Raw('count(r.id) as day_count'),DB::Raw('DATE(r.created_at) as created_at')))
+                ->groupBy('r.created_at')
+                ->orderBy('r.created_at')
+                ->get();
+
+
+        $resumes->groupBy('r.created_at');
+
+        return response()->json(['count_by_days_vacancies'=>$vacancies, 'count_by_days_resumes'=>$resumes]);
+        
+    }
+
+
+    public function circleGraphData()
+    {    
+        // $vacancies = Vacancies::orderBy('created_at', 'asc')->get()->groupBy('name');
+        // error_log($vacancies);
+        $employers_len = count(Employers::all());
+        $students_len = count(Students::all());
+        error_log("employers_len =".$employers_len);
+        error_log("students_len =".$students_len);
+
+        return response()->json(['employers_len'=>$employers_len, 'students_len'=>$students_len]);
+        
+    }
+
+    public function dataBySpec()
+    {    
+        $resumes = DB::table('students as s')
+                ->select(array(DB::Raw('count(s.id) as day_count'),DB::Raw('DATE(s.) as created_at')))
+                ->groupBy('r.created_at')
+                ->orderBy('r.created_at')
+                ->get();
+
+
+        $resumes->groupBy('r.created_at');
+        
+        return response()->json(['employers_len'=>$employers_len, 'students_len'=>$students_len]);
+        
+    }
+
 
     public function index(){
         $user_current=auth()->user();

@@ -75,7 +75,7 @@
                             <div class="header">
                                 <div class="left">
                                 <div class="count">{{$resume->student->surname}}</div>
-                                <div class="title"><a href="/resume/{{$resume->id}}" >Open resume</a></div>
+                                <div class="title"><a href="/home_e/{{$resume->id}}" >Open RES</a></div>
                                 </div>
 
                             </div>

@@ -106,7 +106,7 @@
                                 <div class="header">
                                   <div class="left">
                                     <div class="count"><b>{{$tops->employer->company_name}}</b> Company</div>
-                                    <div class="title"><a href="#" >Open vacancy</a></div>
+                                    <div class="title"><a href="/home_e/{{$tops->id}}" >Open V</a></div>
                                   </div>
                                 </div>
                                 <div class="body">

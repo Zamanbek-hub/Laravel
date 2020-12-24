@@ -24,14 +24,13 @@
                     
                  
                 @endif -->
-                 <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
+                 <!-- <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a> -->
+                
                 @if(auth()->user())
-                      <!-- <h3>{{auth()->user()->email}}</h3> -->
-
                     @if(auth()->user()->role==='student')
-                        <a href="./resume.html"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
-                    @else
-                        <a href="./resume.html">
+                        <a href="{{ route('resume_create') }}"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
+                    @elseif(auth()->user()->role==='employer')
+                        <a href="{{ route('vacancy_create') }}">
                         <button class="btn my-2 my-sm-0" type="submit">Create Vacancy</button>
                     </a>
                     @endif   
@@ -67,15 +66,8 @@
             </nav>
         </div>
 
-    @if (Route::has('login'))
-
-
-        @auth
-
-        @else
-
-        @if(Route::has('login'))
-            @if(auth()->user()!=null && (auth()->user()->role=='employer' || auth()->user()->role=='student') )
+    <!-- @if (! Route::has('login')) -->
+            <!-- @if(auth()->user()!=null && (auth()->user()->role=='employer' || auth()->user()->role=='student') ) -->
                 <form class="form-inline my-2 my-lg-0 search_form">
                     <div class="search_from_in_div">
                         <h3 class="search_form_text">Find your dream Job</h3>
@@ -83,11 +75,7 @@
                         <button class="btn my-2 my-sm-0" type="submit">Search</button>
                     </div>
                 </form>
-            @endif
-        
-        
-    @endif
-            
-        @endif
-    @endif
+            <!-- @endif -->
+    
+    <!-- @endif -->
 </header>
