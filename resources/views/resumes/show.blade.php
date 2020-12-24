@@ -65,7 +65,7 @@
                             <button type="submit" class="btn btn-outline-danger mt-2 " type="button" style="color: black; border-color: grey; "> Delete</buttom>
                         </form>
                         
-                        <a href="/resume_pdf?id={{$resume->id}}"><button class="btn btn-primary">Download</button></a>
+                        <a href="/resume_pdf_init?id={{$resume->id}}"><button class="btn btn-primary">Download</button></a>
                         <form action="/resume_select" method="post">
                         @csrf
                         @method('POST')

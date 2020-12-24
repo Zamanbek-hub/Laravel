@@ -59,22 +59,8 @@
 							</div>
 							<p class="card-text mb-4" > About myself:<span style="font-weight: bolder;"> {{$resume->description}}  </span></p>
 						
-							<form action="/resume/{{$resume->id}}" method="post" class="mb-2">
-							@csrf
-							@method('DELETE')
-								<button type="submit" class="btn btn-outline-danger mt-2 " type="button" style="color: black; border-color: grey; "> Delete</buttom>
-							</form>
-							
-							<a href="/resume_pdf?id={{$resume->id}}"><button class="btn btn-primary">Download</button></a>
-							<form action="/resume_select" method="post">
-							@csrf
-							@method('POST')
-								<input type="hidden" name="resume_id" value="{{$resume->id}}" id="resume_id">
-							</form>
 						</div>
-						<div class="card-footer">
-							<p class="card-subtitle mb-2 text-muted" >Last changes in {{$resume->updated_at}}</p>
-						</div>
+					
 					</div>
 			</div>
 		</div>

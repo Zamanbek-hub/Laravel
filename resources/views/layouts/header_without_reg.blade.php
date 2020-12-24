@@ -16,7 +16,7 @@
                     </li>
                 </ul>
                 @if(auth()->user())
-                      <h3>{{auth()->user()->email}}</h3>
+                      <!-- <h3>{{auth()->user()->email}}</h3> -->
 
                     @if(auth()->user()->role==='student')
                         <a href="./resume.html"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>

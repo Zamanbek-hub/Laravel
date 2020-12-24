@@ -24,7 +24,7 @@ class CreateResumesTable extends Migration
             $table->string('description');  
             $table->string('url_portfolio');  
             $table->bigInteger('student_id')->unsigned();
-            $table->timestamps();
+            $table->timestamps()->useCurrent();
             $table->foreign('student_id')
             ->references('id')
             ->on('students')

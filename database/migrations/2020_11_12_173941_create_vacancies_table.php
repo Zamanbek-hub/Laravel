@@ -24,7 +24,7 @@ class CreateVacanciesTable extends Migration
             $table->integer('view_count');
             $table->integer('salary');
             $table->bigInteger('employer_id')->unsigned();
-            $table->timestamps();
+            $table->timestamps()->useCurrent();
             $table->foreign('employer_id')
             ->references('id')
             ->on('employers')

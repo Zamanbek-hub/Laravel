@@ -6,6 +6,7 @@ use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\FavoriteResumeController;
 use App\Http\Controllers\FavoriteVacanciesController;
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\PDFController;
 
@@ -87,3 +88,11 @@ Route::post('/save_favorite_vacancy', [FavoriteVacanciesController::class, 'save
 Route::get('/resume_pdf', [PDFController::class, 'resume_pdf']);
 Route::get('/resume_pdf_init', [PDFController::class, 'resume_pdf_init']);
 Route::get('/resume_pdf_view', [HomeController::class, 'resume_pdf_view']);
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin/stat/vacancy', [AdminController::class, 'vacancyStat']);
+
+
+Route::group(['prefix' => 'backend'], function () {
+    Voyager::routes();
+});
