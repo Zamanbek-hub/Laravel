@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Employers;
 use App\Models\FavoriteResumes;
 use App\Models\FavoriteVacancies;
 use App\Models\Resumes;
-use App\Models\Vacancies;
-use App\Models\Selected_Resumes;
+use App\Models\Skills;
 use App\Models\Students;
+use App\Models\Specialties;
+use App\Models\Resume_skills;
+use App\Models\User;
+use App\Models\Vacancies;
+
+use App\Models\Selected_Resumes;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -31,26 +37,78 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        
+    public function index(){
+
         error_log(Auth::user()->name);
         error_log(Auth::user()->role);
         if(Auth::user()->role === 'student'){
-            error_log("Student");
-            $student = Students::where('user_id', Auth::user()->id)->firstOrFail();
-            error_log($student);
-            error_log("id=".$student->id);
-            $resumes = Resumes::where('student_id', $student->id)->get();
-            $vacancies = Vacancies::orderBy('id', 'desc')->take(3)->get();
-            return view('home_students', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+            
+            $user = User::findOrFail(Auth::user()->id);
+            $student = Students::where('user_id',$user->id)->get();
+            $resumes = Resumes::where('student_id',$student[0]->id)->get();
+
+            $count=0;
+            $vacs=array();
+            $vacancies = Vacancies::get();
+            foreach($resumes as $res){
+                foreach($res->specialties as $sp){
+                    for($i=0; $i<count($vacancies); $i++){
+                        foreach($vacancies[$i]->specialties as $spec){
+                            if($sp->id==$spec->id){
+                                $count++;
+                            }
+                        }
+                        if($count>0 && !in_array($vacancies[$i],$vacs)){
+                                array_push($vacs, $vacancies[$i]);
+                        }                        
+                        $count=0;
+                    }
+                }
+            }
+            $specialties = DB::table('specialties')->get();
+            $vacanciesTop = Vacancies::orderBy('view_count','DESC')->skip(0)->take(5)->get();
+
+            return view('resumes.index',['student'=>$student,'vacs'=>$vacs,'vacanciesTop'=>$vacanciesTop],compact('resumes'));  
         }
         else if(Auth::user()->role === 'employer'){
-            error_log("Employer");
-            $employer = Employers::where('user_id', Auth::user()->id)->firstOrFail();
-            $resumes = Resumes::orderBy('id', 'desc')->take(3)->get();
-            $vacancies = Vacancies::where('employer_id', $employer->id)->get();
-            return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
+            $user = User::findOrFail(Auth::user()->id);
+            
+            $employer = Employers::where('user_id',$user->id)->get();
+        
+            $vacancies = Vacancies::where('employer_id',$employer[0]->id)->get();
+            $count=0;
+            $ress=array();
+            $resumeS = Resumes::get();
+            foreach($vacancies as $vac){
+                foreach($vac->specialties as $sp){
+                    for($i=0; $i<count($resumeS); $i++){
+                    foreach($resumeS[$i]->specialties as $spec){
+                        if($sp->id==$spec->id){
+                            $count++;
+                        }
+                    }
+                    if($count>0){
+                        $c=0;
+                        for($j=0; $j<count($ress); $j++){
+                            if($ress[$j]->id==$resumeS[$i]->id){
+                                $c++;
+                            }
+                        }
+                        if($c==0){
+                            array_push($ress, $resumeS[$i]);
+                        }
+                        $c=0;
+                    }
+                    $count=0;
+                    }
+                }
+            }
+            $resumesTop = Resumes::orderBy('view_count','DESC')->skip(0)->take(5)->get();
+            $specialties = DB::table('specialties')->get();
+            return view('vacancies.index',compact('vacancies'),['employer'=>$employer,'specialties'=>$specialties,'resumes'=>$ress,'resumesTop'=>$resumesTop]);  
+        }
+        else if(Auth::user()->role === 'admin'){
+              return view('admin.index');
         }
         else {
             error_log("403");

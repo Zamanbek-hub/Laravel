@@ -1,7 +1,7 @@
 <header>
         <div class="navbar_out">
             <nav class="navbar navbar-expand-lg container">
-                <a class="navbar-brand" href="./home.html">Home</a>
+                <a class="navbar-brand" href="./home.html">Home oppo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:#fff; font-size:28px;"></i></i></span>
                 </button>

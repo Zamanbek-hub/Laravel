@@ -15,8 +15,8 @@ class CreateResumesSpecialtiesTable extends Migration
     {
         Schema::create('resumes_specialties', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('resumes_id')->unsigned();
             $table->bigInteger('specialties_id')->unsigned();
+            $table->bigInteger('resumes_id')->unsigned();
             $table->timestamps();
         });
     }
