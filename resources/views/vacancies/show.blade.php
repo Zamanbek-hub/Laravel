@@ -18,7 +18,7 @@
 @section('content')
 
 <body>
-    @include('layouts.header') 
+    @include('layouts.header_without_reg') 
    
 <div class="body_main " >
 <div class="container mt-5">
@@ -48,14 +48,18 @@
                             @endforeach
                         </p>
                         <p class="card-text" > Salary:<span style="font-weight: bolder;"> {{$vacancy->salary}} KZT  </span></p>
-                        <div>
+                        <div class="">
                               @if(count($vacancy->skills)!=0)
                               <p class="card-text" > Skills: </p>
-                                  <ul class="d-flex">
-                                    @foreach($vacancy->skills as $skill)
-                                      <li class="d-flex" style="margin-left:30px; font-weight: bolder; border: 1px solid lightgrey; background-color: lightgrey;">{{ $skill->name }}</li>
+                              <div class="container">
+                                <div class="row">
+                                @foreach($vacancy->skills as $skill)
+                                <div class="col-sm m-auto" style="">
+                                   <p style="background-color:#E0E0E0;">{{ strtolower($skill->name) }}</p>
+                                </div>
                                     @endforeach
-                                  </ul>
+                                </div>
+                              </div>
                               @else
                               <p class="card-text mb-2" > Skills: <em>no skills</em> </p>
                             @endif
@@ -70,7 +74,7 @@
                     <div class="card-footer">
                         <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancy->updated_at}}</p>
                     </div>
-                    <form action="/vacancy/{{$vacancy->id}}" method="post">
+                    <form action="/home_e/{{$vacancy->id}}" method="post">
                         @csrf
                         @method('DELETE')
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,11 +99,10 @@
                     </div>
                 </form>
                 <div class='res mt-5'>
-                    <form action="/vacancy/update" method="post">
+                    <form action="/home_e/update" method="post">
                         @csrf 
                         <h5 class="title">Edit vacancy requirements</h5>
                         <input type="hidden" value="{{$vacancy->id}}" name="id">
-
                         <div class="profile_form">
                             <h3>1. About company </h3>
                             <div>
@@ -116,48 +119,61 @@
                             </div>
                             <br/> 
                         </div>
-
                         <div class="specialist_form">
                             <h3>2.You're looking employee?</h3>
-                            
-                            <div>
-                                <select name="spec_id" style="width:400px;">
-                                    @foreach($specialties as $sp)
-                                        @if($sp->id==$vacancy->spec_id)
-                                        <option value="{{$sp->id}}" selected> {{$sp->name}} </option>
-                                        @else
-                                        <option value="{{$sp->id}}"> {{$sp->name}} </option>
-                                        @endif
+
+                            <div id="specialties" >
+                            <div class="mb-4" id="">
+                                  @if(count($vacancy->specialties)!=0)
+                                    @foreach($vacancy->specialties as $assignedSpecss)
+                                  
+                                      <input type="text" value="{{$assignedSpecss->name}}" name="sss"  style="width:200px;" disabled>
+                                      <input class="mr-2" type="checkbox" value="{{$assignedSpecss->name}}" name="assignedSpecs[]" checked>
+                                  
                                     @endforeach
+                                  @endif
+                                
+                              </div>
+                             </div>
+                            <div>
+                                <select name="spec"  id="add_spec" style="width:400px;">
+                                    @if(count($specialties)!=0)
+                                      @foreach($specialties as $sp)
+                                          <option  id="add_spec" value="{{$sp->name}}" > {{$sp->name}} </option>
+                                      @endforeach
+                                    @endif
                                 </select>
+                                <button class="btn my-2 my-sm-0" type="button" onclick="addSpec()">Keep</button>
                             </div>
                             <br/>
                             <div>
                                 <input type="number" value="{{$vacancy->salary}}" name="salary" placeholder="Salary" min=0>
                                 <select style="width: 100px;">
                                     <option >KZT</option>
-                                    <!-- <option>DLR</option>
-                                    <option>RUB</option> -->
                                 </select>
                             </div>
                             <br/>
                         </div>
-
-<!-- 
                         <div class="main_skills_form">
                             <h3>Main Skills...</h3>
                             <div id="skills">
+                                <div class="mb-3" id="">
+                                  @if(count($vacancy->skills)!=0)
+                                    @foreach($vacancy->skills as $assignedSkills)
+                                      <input type="text" value="{{$assignedSkills->name}}" name="sss"  style="width:100px;" disabled>
+                                      <input class="mr-2" type="checkbox" value="{{$assignedSkills->name}}" name="assignedSkills[]" checked>
+                                    @endforeach
+                                  @endif
+                                
+                              </div>
                             </div>
-                            
                             <br/>
                             <div>
                                 <input type="text" name="skill" id="add_skill" placeholder="skill">
                                 <button class="btn my-2 my-sm-0" type="button" onclick="addSkill()">Keep</button>
                             </div>
-                            
-                        </div> -->
-
-                        <div class="about_yourself_form">
+                        </div>
+                        <div class="about_yourself_form mt-2">
                             <h3>3.About other requirements and descriptions...</h3>
                             <div>
                                 <textarea name="description" value="{{$vacancy->description}}" style="width: 700px; height: 400px;" >{{$vacancy->description}}</textarea>
@@ -167,91 +183,81 @@
                         <button class="btn btn-outline-warning my-2 my-sm-0" style="color: black; border-color: grey; ">Save</button>
                     </form>
                 </div>
-            
           </div>
           <div class="col-md-3">
-              <div class="tile wide quote">
-                  <div class="header">
-                    <div class="left">
-                      <div class="count">Almaty AI Laboratory</div>
-                      <div class="title"><a href="#" >Open vacancy</a></div>
+                @if(count($resumesTop)!=0)
+                  @foreach($resumesTop as $tops)
+                    <div class="tile wide quote">
+                        <div class="header">
+                            <div class="left">
+                            <div class="count">{{$tops->full_name}}</div>
+                            <div class="title"><a href="#" >Open resume</a></div>
+                        </div>
+                        </div>
+                        <div class="body">
+                            <div class="title">
+                                @if(count($tops->skills)!=0)
+                                    @foreach($tops->specialties as $topsSpecs)
+                                            {{$topsSpecs->name}},
+                                    @endforeach      
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                    
-                  </div>
-                  <div class="body">
-                    <div class="title">Python Developer</div>
-                  </div>
-              </div>
-
-                <div class="tile wide quote">
-                  <div class="header">
-                    <div class="left">
-                      <div class="count">Kaspi Bank</div>
-                      <div class="title"><a href="#" >Open vacancy</a></div>
-                    </div>
-                    
-                  </div>
-                  <div class="body">
-                    <div class="title">Middle C# Developer</div>
-                  </div>
-              </div>
-
-              <div class="tile wide quote">
-                  <div class="header">
-                    <div class="left">
-                      <div class="count">Voix Almaty</div>
-                      <div class="title"><a href="#" >Open vacancy</a></div>
-                    </div>
-                    
-                  </div>
-                  <div class="body">
-                    <div class="title"> Junior System Analyst</div>
-                  </div>
-              </div>
-              <div class="tile wide quote">
-                  <div class="header">
-                    <div class="left">
-                      <div class="count">Kaspi Bank</div>
-                      <div class="title"><a href="#" >Open vacancy</a></div>
-                    </div>
-                    
-                  </div>
-                  <div class="body">
-                    <div class="title">Middle Java Developer</div>
-                  </div>
-              </div>
-
-              <div class="tile wide quote">
-                  <div class="header">
-                    <div class="left">
-                      <div class="count">Voix Almaty</div>
-                      <div class="title"><a href="#" >Open vacancy</a></div>
-                    </div>
-                    
-                  </div>
-                  <div class="body">
-                    <div class="title"> Junior System Analyst</div>
-                  </div>
-              </div>
-
-
-          </div>
-            
+                @endforeach
+                @endif
+                </div>  
+          </div>      
+    </div>
+     <hr style="color: #343434;">
   </div>
-    <hr style="color: #343434;">
-    <div class="d-flex justify-content-center">
-      <a href="#" class="btn btn-outline-warning mb-5" type="button" style="color: black; border-color: grey; ">Recommendations</a>
-  </div>
-  
 </div>
-</div>
-
-
-
     @include('layouts.footer')
-
-    
-
 </body>
+<script type="text/javascript">
+        const addSkillInput = document.getElementById("add_skill");
+        const addSkill = () => {
+
+            if(addSkillInput.value != ''){
+                document.getElementById("skills").innerHTML += 
+                `<div class="particular_skill" id="particular_skill_${addSkillInput.value}">
+                    <input type="text" value="${addSkillInput.value}" name="ggg"  style="width:100px;" disabled>
+                    <input type="checkbox" value="${addSkillInput.value}" name="skills[]" checked>
+                    <span class="particular_skill_remove" onclick="removeSkill('particular_skill_${addSkillInput.value}')">
+                        <i class="far fa-trash-alt"></i>
+                        </span>
+                </div>`
+            }
+
+            addSkillInput.value = "";
+        }
+
+        const removeSkill = (id) => {
+            // alert(id);
+            document.getElementById(id).style.display = "none"; 
+        }
+    </script>
+      <script type="text/javascript">
+        const addSpecInput = document.getElementById("add_spec");
+        const addSpec = () => {
+
+            if(addSpecInput.value != ''){
+                document.getElementById("specialties").innerHTML += 
+                `<div class="particular_spec" id="particular_spec_${addSpecInput.value}">
+                    <input type="text" value="${addSpecInput.value}" name="ggg" disabled>
+                    <input type="checkbox" value="${addSpecInput.value}" name="specialties[]" checked>
+                    <span class="particular_spec_remove" onclick="removeSpec('particular_spec_${addSpecInput.value}')">
+                        <i class="far fa-trash-alt"></i>
+                        </span>
+                </div>`
+                
+            }
+        }
+
+        const removeSpec = (id) => {
+            // alert(id);
+            document.getElementById(id).style.display = "none"; 
+        }
+    </script>
 @endsection
 

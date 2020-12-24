@@ -15,32 +15,35 @@
                     <a class="nav-link" href="#">To job seekers</a>
                     </li>
                 </ul>
-                    if()
-                    <a href="{{ route('resume_create') }}"><button class="btn my-2 my-sm-0" type="submit">Create Resume</button></a>
-                    <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
-
-
-                    @if (Route::has('login'))
-
-                            @auth
-                            <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                        <button class="btn my-2 my-sm-0">
-                                                         {{ __('Logout') }}
-                                                        </button>
-                                        
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                            @else
-                                <a href="{{route('login')}}"><button class="btn my-2 my-sm-0" type="submit">Sign In</button></a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"><button class="btn my-2 my-sm-0" type="submit">Sign Up</button></a>
-                                @endif
+                @if(Route::has('login'))
+                        @if(auth()->user()!=null && auth()->user()->role=='student')
+                            <a href="{{ route('resume_create') }}"><button class="btn my-2 my-sm-0" type="button">Create  Resume</button></a>
+                            @elseif(auth()->user()!=null && auth()->user()->role=='employer')
+                            <a href="{{ route('vacancy_create') }}"><button class="btn my-2 my-sm-0" type="button">Create Vacancy</button></a>
                             @endif
+                    
+                 
+                @endif
+                 <a href="./contact_us.html"><button class="btn my-2 my-sm-0" type="submit">Contact Us</button></a>
+                    @if (Route::has('login'))
+                        @auth
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <button class="btn my-2 my-sm-0">
+                                {{ __('Logout') }}
+                            </button>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        @else
+                            <a href="{{route('login')}}"><button class="btn my-2 my-sm-0" type="submit">Sign In</button></a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"><button class="btn my-2 my-sm-0" type="submit">Sign Up</button></a>
+                            @endif
+                        @endif
 
                     @endif
                 <!-- </form> -->
@@ -54,13 +57,21 @@
         @auth
 
         @else
-            <form class="form-inline my-2 my-lg-0 search_form">
-                <div class="search_from_in_div">
-                    <h3 class="search_form_text">Find your dream Job</h3>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search Job" aria-label="Search">
-                    <button class="btn my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </form>
+
+        @if(Route::has('login'))
+            @if(auth()->user()!=null && (auth()->user()->role=='employer' || auth()->user()->role=='student') )
+                <form class="form-inline my-2 my-lg-0 search_form">
+                    <div class="search_from_in_div">
+                        <h3 class="search_form_text">Find your dream Job</h3>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Job" aria-label="Search">
+                        <button class="btn my-2 my-sm-0" type="submit">Search</button>
+                    </div>
+                </form>
+            @endif
+        
+        
+    @endif
+            
         @endif
     @endif
 </header>

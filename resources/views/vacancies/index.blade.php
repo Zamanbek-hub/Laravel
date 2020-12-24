@@ -3,7 +3,7 @@
 @section('head_links')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home Employer</title>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- jQuery and JS bundle w/ Popper.js -->
@@ -39,7 +39,7 @@
 @section('content')
 
 <body>
-    @include('layouts.header') 
+    @include('layouts.header_without_reg') 
 
     <form class="form-inline my-2 my-lg-0 search_form container">
 
@@ -93,80 +93,35 @@
                                 </h5>
                                 <p class="card-subtitle mb-2 text-muted" >Last changes in {{$vacancies[$i]->updated_at}}</p>
                                 <p class="card-text" style="font-weight: bolder;"> Company: {{$employer[0]->company_name}}</p>
-                                <a href="/vacancy/{{$vacancies[$i]->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
+                                <a href="/home_e/{{$vacancies[$i]->id}}" class="btn btn-outline-warning " type="button" style="color: black; border-color: grey; "> More details</a>
                             </div>
                         </div>
                         @endfor
                         @endif 
                 </div>
                 <div class="col-md-3">
+                @if(count($resumesTop)!=0)
+                  @foreach($resumesTop as $tops)
                     <div class="tile wide quote">
                         <div class="header">
                             <div class="left">
-                            <div class="count">Alibi Toktassyn</div>
+                            <div class="count">{{$tops->full_name}}</div>
                             <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-                            
+                        </div>
                         </div>
                         <div class="body">
-                            <div class="title">Python Developer</div>
-                        </div>
-                    </div>
-
-                        <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Aidana Assysbekova</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
+                            <div class="title">
+                                @if(count($tops->specialties)!=0)
+                                    @foreach($tops->specialties as $topsSpecs)
+                                            {{$topsSpecs->name}},
+                                    @endforeach      
+                                @endif
                             </div>
-                            
-                        </div>
-                        <div class="body">
-                            <div class="title">Middle C# Developer</div>
                         </div>
                     </div>
-
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Serik Sultanbek</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-                            
-                        </div>
-                        <div class="body">
-                            <div class="title"> Junior System Analyst</div>
-                        </div>
-                    </div>
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Aya Sapakova</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-                            
-                        </div>
-                        <div class="body">
-                            <div class="title">Middle Java Developer</div>
-                        </div>
-                    </div>
-
-                    <div class="tile wide quote">
-                        <div class="header">
-                            <div class="left">
-                            <div class="count">Zamanbek Turukbaev</div>
-                            <div class="title"><a href="#" >Open resume</a></div>
-                            </div>
-                            
-                        </div>
-                        <div class="body">
-                            <div class="title"> Junior System Analyst</div>
-                        </div>
-                    </div>
-
-
-                </div>
-                    
+                @endforeach
+                @endif
+                </div>     
         </div>
             <hr style="color: #343434;">
             <div class="d-flex justify-content-center">
@@ -198,10 +153,6 @@
                   
                 </div>
               </div>
-
-
-
-              
             </div>
         
         </div>

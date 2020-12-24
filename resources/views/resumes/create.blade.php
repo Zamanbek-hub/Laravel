@@ -13,14 +13,14 @@
 @section('content')
 
 <body>
-    @include('layouts.header') 
+    @include('layouts.header_without_reg') 
 
     <main class="w-100">
         <div class="row container-fluid main_resume_paper">
             <div class="col-2"></div>
             <div class="col-10 colored_page resume_part">
                 <div class="resume">
-                    <form action="/resume" method="post">
+                    <form action="/home_s" method="post">
                     @csrf 
                         <h5 class="title">Your resume</h5>
                         <div class="profile_form">
@@ -75,19 +75,11 @@
                         <div class="main_skills_form">
                             <h3>3.Main Skills...</h3>
                             <div id="skills">
-                           
                             </div>
                             
                             <br/>
                             <div>
-                                <!-- <input type="text" name="skill" id="add_skill" placeholder="skill"> -->
-                                <select name="skill" id="add_skill">
-                                    <option>c++ </option>
-                                    <option>c# </option>
-                                    <option>java </option>
-                                    <option> python </option>
-                                    <option>laravel </option>
-                                 </select>
+                                <input type="text" name="skill" id="add_skill" placeholder="skill">
                                 <button class="btn my-2 my-sm-0" type="button" onclick="addSkill()">Keep</button>
                             </div>
                             
@@ -114,7 +106,6 @@
     </main>
 
     @include('layouts.footer')
-
     <script type="text/javascript">
         const addSkillInput = document.getElementById("add_skill");
         const addSkill = () => {
@@ -122,7 +113,7 @@
             if(addSkillInput.value != ''){
                 document.getElementById("skills").innerHTML += 
                 `<div class="particular_skill" id="particular_skill_${addSkillInput.value}">
-                    <input type="text" value="${addSkillInput.value}" name="ggg" disabled>
+                    <input type="text" value="${addSkillInput.value}" name="ggg"  style="width:100px;" disabled>
                     <input type="checkbox" value="${addSkillInput.value}" name="skills[]" checked>
                     <span class="particular_skill_remove" onclick="removeSkill('particular_skill_${addSkillInput.value}')">
                         <i class="far fa-trash-alt"></i>
@@ -142,18 +133,17 @@
         const addSpecInput = document.getElementById("add_spec");
         const addSpec = () => {
 
-            if(addSkillInput.value != ''){
+            if(addSpecInput.value != ''){
                 document.getElementById("specialties").innerHTML += 
                 `<div class="particular_spec" id="particular_spec_${addSpecInput.value}">
                     <input type="text" value="${addSpecInput.value}" name="ggg" disabled>
+                    <input type="checkbox" value="${addSpecInput.value}" name="specialties[]" checked>
                     <span class="particular_spec_remove" onclick="removeSpec('particular_spec_${addSpecInput.value}')">
                         <i class="far fa-trash-alt"></i>
                         </span>
                 </div>`
                 
             }
-
-            addSpecInput.value = "";
         }
 
         const removeSpec = (id) => {
@@ -161,6 +151,7 @@
             document.getElementById(id).style.display = "none"; 
         }
     </script>
+    
 
 </body>
 @endsection
