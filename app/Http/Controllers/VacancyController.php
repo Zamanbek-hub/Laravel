@@ -10,6 +10,8 @@ use App\Models\Specialties;
 use App\Models\Resumes;
 use App\Models\Vacancies;
 
+use PDF;
+
 
 class VacancyController extends Controller{
    

@@ -26,6 +26,11 @@
           <div class="col-md-9">
                 <div class="card mb-4" >
                     <div class="card-body">
+                        @if(auth()->user()->role==='student')
+                          <input class="star" id="favorite" type="checkbox" title="bookmark page" onchange="saveFavoriteVacancy()">
+                        <span id="favorite_text"></span>
+                        @endif
+                        <input type="hidden" name="vacancy_id" value="{{$vacancy->id}}" id="vacancy_id">
                         <h5 class="card-title mt-3 mb-3" align="center" style="font-weight: bold; "> Vacancy  </h5>
                         @if(count($vacancy->specialties)!=0)
                             <p class="card-text pr-2" > Specialty :  
@@ -259,5 +264,37 @@
             document.getElementById(id).style.display = "none"; 
         }
     </script>
+    
+    <script type="text/javascript">
+        const url = '/save_favorite_vacancy';
+        
+        async function saveFavoriteVacancy (){
+            try {
+                
+                const data = { 
+                  _token: document.getElementsByName("_token")[0].value,
+                  vacancy_id: document.getElementById('vacancy_id').value
+                  };
+                
+                console.log(data._token);
+                console.log(data.vacancy_id);
+                const response = await fetch(url, {
+                    method: 'POST', // или 'PUT'
+                    body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                });
+
+                
+                const json = await response.json();
+                console.log('Успех:', JSON.stringify(json));
+                document.getElementById('favorite_text').innerHTML = JSON.stringify(json['success']);
+                } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        }
+    </script>
+</body>
 @endsection
 

@@ -6,6 +6,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\FavoriteResumeController;
+use App\Http\Controllers\FavoriteVacanciesController;
+
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +59,7 @@ Route::get('/resume_hire', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/favorites', [App\Http\Controllers\HomeController::class, 'favorites'])->name('favorites');
 
 Route::get('/home_s', [ResumeController::class, 'index'] )->name('home_student');
 Route::get('/home_s/create', [ResumeController::class, 'create'] ) -> name('resume_create');
@@ -118,3 +122,10 @@ Route::delete('/home_a/resumes/{id}', [AdminController::class, 'destroy_resume']
 Route::delete('/home_a/users/{id}', [AdminController::class, 'destroy_user'] );
 
 
+Route::post('/save_favorite_resume', [FavoriteResumeController::class, 'saveFavoriteResume'] );
+Route::post('/save_favorite_vacancy', [FavoriteVacanciesController::class, 'saveFavoriteVacancy'] );
+
+
+Route::get('/resume_pdf', [PDFController::class, 'resume_pdf']);
+Route::get('/resume_pdf_init', [PDFController::class, 'resume_pdf_init']);
+Route::get('/resume_pdf_view', [HomeController::class, 'resume_pdf_view']);

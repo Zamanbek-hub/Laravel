@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Employers;
+use App\Models\FavoriteResumes;
+use App\Models\FavoriteVacancies;
 use App\Models\Resumes;
 use App\Models\Skills;
 use App\Models\Students;
@@ -10,7 +13,6 @@ use App\Models\Specialties;
 use App\Models\Resume_skills;
 use App\Models\User;
 use App\Models\Vacancies;
-use App\Models\Employers;
 
 use App\Models\Selected_Resumes;
 use Illuminate\Support\Facades\Auth;
@@ -117,14 +119,14 @@ class HomeController extends Controller
     public function selected_resumes(){
         if(Auth::user()->role === 'stude'){
             error_log("Student");
-            $resumes = Resumes::where('employer_id', auth()->user->id)->get();
+            $resumes = Resumes::where('employer_id', Auth::user()->id)->get();
             $vacancies = Vacancies::orderBy('id', 'desc')->take(3)->get();
             return view('home_students', ['resumes' => $resumes, 'vacancies' => $vacancies] );
         }
         else if(Auth::user()->role === 'employer'){
             error_log("Employer");
             $resumes = Resumes::orderBy('id', 'desc')->take(3)->get();
-            $vacancies = Vacancies::where('employer_id', auth()->user->id)->get();
+            $vacancies = Vacancies::where('employer_id', Auth::user()->id)->get();
             return view('home_employers', ['resumes' => $resumes, 'vacancies' => $vacancies] );
         }
         else {
@@ -134,5 +136,37 @@ class HomeController extends Controller
 
 
         
+    }
+
+
+    public function favorites(){
+        if(Auth::user()->role === 'student'){
+            $favorites = FavoriteVacancies::where('user_id',Auth::user()->id)->get();
+            return view('favorites', ['favorites' => $favorites] );
+
+        }
+        else if(Auth::user()->role === 'employer'){
+            error_log("Employer");
+
+            $favorites = FavoriteResumes::where('user_id',Auth::user()->id)->get();
+            error_log($favorites);
+            return view('favorites', ['favorites' => $favorites] );
+        }
+        else {
+            error_log("403");
+            return view('403');
+        }
+        
+    }
+
+
+    public function resume_pdf_view()
+    {   
+        error_log("WE are here");
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
+        return view('resumes.resume_pdf');
     }
 }

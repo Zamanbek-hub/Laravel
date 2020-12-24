@@ -13,6 +13,8 @@ use App\Models\Resume_skills;
 use App\Models\User;
 use App\Models\Vacancies;
 
+use PDF;
+
 
 class ResumeController extends Controller
 {

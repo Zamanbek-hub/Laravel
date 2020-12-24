@@ -39,9 +39,12 @@
                             <a href="#" class="list-group-item list-group-item-action disabled d-flex" >
                                     <span class="material-icons" style="margin-right:5px; ">apartment</span> BI group company
                             </a>
-                            <a href="/selected_resumes" class="list-group-item list-group-item-action d-flex">
-                                <span class="material-icons" style="margin-right:5px;">star_outline</span>Selected resume
+                           
+                            <a href="/favorites" class="list-group-item list-group-item-action d-flex">
+                                <span class="material-icons" style="margin-right:5px;">star_outline</span>Favorite resume
                             </a>
+                           
+                            
                             <a href="#" class="list-group-item list-group-item-action d-flex">
                                 <span class="material-icons" style="margin-right:5px;">contact_mail</span>My responses
                             </a>
